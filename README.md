@@ -1,1 +1,1 @@
-### The degree project of JavaScript Frontend course of Sber University
+### The degree project of Sber University JavaScript Frontend course
