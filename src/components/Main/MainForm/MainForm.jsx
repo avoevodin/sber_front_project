@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MainContext } from "../../../contexts/MainContext";
 
 const initInputs = {
     title: "",
@@ -9,6 +10,7 @@ const initInputs = {
 
 const MainForm = () => {
     const [inputs, setInputs] = useState(initInputs);
+    const { createPost } = useContext(MainContext)
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -21,9 +23,11 @@ const MainForm = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
+
+        const trimInputs = Object.fromEntries(Object.entries(inputs).map(([key, value]) => [key, value.trim()]))
         // how to optimize?
         if (inputs.title && inputs.text) {
-            createPost(inputs)
+            createPost(trimInputs)
             setInputs(initInputs)
         }
     }
