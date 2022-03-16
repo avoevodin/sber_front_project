@@ -1,6 +1,6 @@
 import MainContextProvider from "../../contexts/MainContext"
 import MainForm from "./MainForm/MainForm"
-import MainPosts from "./MainPosts/MainPosts"
+import PostsList from "./MainPosts/PostsList"
 
 const Main = () => {
 
@@ -14,10 +14,10 @@ const Main = () => {
                     <div className="vr"></div>
                 </div>
                 <div className="container col-8">
-                    <MainPosts />
+                    <PostsList />
                 </div>
             </div >
-        </MainContextProvider >
+        </MainContextProvider>
     )
 }
 
