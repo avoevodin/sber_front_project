@@ -7,6 +7,7 @@ const CommentsList = ({ postId }) => {
     const [input, setInput] = useState("");
 
     const changeHandler = (e) => setInput(e.target.value);
+
     const submitHandler = (e) => {
         e.preventDefault();
 

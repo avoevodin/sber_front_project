@@ -2,11 +2,18 @@ import { useContext } from "react";
 import { MainContext } from "../../../../contexts/MainContext";
 import { BsFillTrashFill } from "react-icons/bs";
 import CommentsList from "../../CommentsList/CommentsList";
+import { CommentsContext } from "../../../../contexts/CommentsContext";
 
 const PostItem = ({ id, title, hashtag, image, text, date, commentsExpanded, index }) => {
     const { deletePost, collapseComments } = useContext(MainContext);
-    const deleteHandler = () => deletePost(id);
-    const collapseCommentsHandler = () => collapseComments(id);
+    const { deleteCommentsByPost } = useContext(CommentsContext)
+
+    const deleteHandler = () => {
+        deleteCommentsByPost(id)
+        deletePost(id)
+    }
+
+    const collapseCommentsHandler = () => collapseComments(id)
     return (
         <li className="list-group-item">
             <div className="my-3">

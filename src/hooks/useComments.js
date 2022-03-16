@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require("uuid")
 const useComments = () => {
     const [comments, setComments] = useState([])
 
-    const createComment = (inputs) => {
+    const createComment = async (inputs) => {
         const newComment = {
             id: uuidv4(),
             postId: inputs.postId,
@@ -20,9 +20,9 @@ const useComments = () => {
     }
 
     useEffect(() => {
-        const dataFromLS = localStorage.getItem(LSCommentsKey)
+        const dataFromLS = JSON.parse(localStorage.getItem(LSCommentsKey))
         if (dataFromLS) {
-            setComments(JSON.parse(dataFromLS))
+            setComments(dataFromLS)
         }
     }, [])
 

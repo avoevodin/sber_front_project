@@ -6,8 +6,8 @@ import PostItem from "./PostItem/PostItem";
 const PostsList = () => {
     const { posts } = useContext(MainContext);
     return (
-        <ul className="list-group list-group-flush">
-            <CommentsContextProvider>
+        <CommentsContextProvider>
+            <ul className="list-group list-group-flush">
                 {posts.map((post, index) => (
                     <PostItem
                         key={post.id}
@@ -21,8 +21,8 @@ const PostsList = () => {
                         index={index}
                     />
                 ))}
-            </CommentsContextProvider>
-        </ul>
+            </ul>
+        </CommentsContextProvider>
     );
 };
 

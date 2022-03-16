@@ -4,9 +4,9 @@ import useComments from "../hooks/useComments"
 const CommentsContext = createContext()
 
 const CommentsContextProvider = ({ children }) => {
-    const { comments, createComment } = useComments()
+    const { comments, createComment, deleteCommentsByPost } = useComments()
     return (
-        <CommentsContext.Provider value={{ comments, createComment }}>
+        <CommentsContext.Provider value={{ comments, createComment, deleteCommentsByPost }}>
             {children}
         </CommentsContext.Provider>
     )

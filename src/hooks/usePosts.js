@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { CommentsContext } from "../contexts/CommentsContext"
 import { LSPostsKey, options } from "../settings"
-import useComments from "./useComments"
 
 const { v4: uuidv4 } = require("uuid")
 
 const usePosts = () => {
     const [posts, setPosts] = useState([])
-    const { deleteCommentsByPost } = useComments()
 
     const createPost = (inputs) => {
         const newPost = {
@@ -23,7 +22,6 @@ const usePosts = () => {
 
     const deletePost = (id) => {
         setPosts((prev) => prev.filter((post) => post.id !== id))
-        deleteCommentsByPost(id)
     }
 
     const collapseComments = (id) => {
@@ -39,9 +37,9 @@ const usePosts = () => {
     }
 
     useEffect(() => {
-        const dataFromLS = localStorage.getItem(LSPostsKey)
+        const dataFromLS = JSON.parse(localStorage.getItem(LSPostsKey))
         if (dataFromLS) {
-            setPosts(JSON.parse(dataFromLS).map(post => {
+            setPosts(dataFromLS.map(post => {
                 return {
                     ...post,
                     commentsExpanded: false,
