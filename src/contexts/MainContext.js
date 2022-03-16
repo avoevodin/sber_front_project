@@ -4,9 +4,9 @@ import usePosts from "../hooks/usePosts";
 const MainContext = createContext()
 
 const MainContextProvider = ({ children }) => {
-    const { posts, createPost } = usePosts()
+    const { posts, createPost, deletePost } = usePosts()
     return (
-        <MainContext.Provider value={{ posts, createPost }}>
+        <MainContext.Provider value={{ posts, createPost, deletePost }}>
             {children}
         </MainContext.Provider>
     )

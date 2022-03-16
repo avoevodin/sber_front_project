@@ -23,7 +23,7 @@ const usePosts = () => {
     }
 
     const deletePost = (id) => {
-        setPosts(prev => prev.filter((post) => post.id !== id))
+        setPosts((prev) => prev.filter((post) => post.id !== id))
     }
 
     return {
