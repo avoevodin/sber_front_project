@@ -2,9 +2,9 @@ import MainPost from "./MainPost/MainPost"
 
 const MainPosts = () => {
     return (
-        <ul class="list-group list-group-flush">
+        <ul className="list-group list-group-flush" >
             <MainPost />
-        </ul>
+        </ul >
     )
 }
 

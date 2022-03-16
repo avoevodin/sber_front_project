@@ -2,6 +2,7 @@ import "./App.css";
 import Header from "./components/Header/Header"
 import Main from "./components/Main/Main"
 import Footer from "./components/Footer/Footer"
+import MainContextProvider from "./contexts/MainContext";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Main />
       <hr />
       <Footer />
-    </div>
+    </div >
   );
 }
 
