@@ -8,7 +8,7 @@ const PostItem = ({ id, title, hashtag, image, text, date, commentsExpanded, ind
     const collapseCommentsHandler = () => collapseComments(id);
     return (
         <li className="list-group-item">
-            <div className="card mb-3">
+            <div className="my-3">
                 <div className="row g-0">
                     <div className="col-md-4">
                         <img

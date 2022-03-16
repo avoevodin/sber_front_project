@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react"
+import { LSPostsKey, options } from "../settings"
 
 const { v4: uuidv4 } = require("uuid")
-const options = {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-}
-const LSPostsKey = "posts"
 
 const usePosts = () => {
     const [posts, setPosts] = useState([])
