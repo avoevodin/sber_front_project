@@ -36,13 +36,19 @@ const usePosts = () => {
                     commentsExpanded: !post.commentsExpanded,
                 }
             }
+            return post
         }))
     }
 
     useEffect(() => {
         const dataFromLS = localStorage.getItem(LSPostsKey)
         if (dataFromLS) {
-            setPosts(JSON.parse(dataFromLS))
+            setPosts(JSON.parse(dataFromLS).map(post => {
+                return {
+                    ...post,
+                    commentsExpanded: false,
+                }
+            }))
         }
     }, [])
 

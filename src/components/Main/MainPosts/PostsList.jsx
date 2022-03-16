@@ -6,7 +6,7 @@ const PostsList = () => {
     const { posts } = useContext(MainContext);
     return (
         <ul className="list-group list-group-flush">
-            {posts.map((post) => (
+            {posts.map((post, index) => (
                 <PostItem
                     key={post.id}
                     id={post.id}
@@ -16,6 +16,7 @@ const PostsList = () => {
                     text={post.text}
                     date={post.date}
                     commentsExpanded={post.commentsExpanded}
+                    index={index}
                 />
             ))}
         </ul>
