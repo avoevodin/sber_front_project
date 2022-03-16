@@ -15,6 +15,7 @@ const PostsList = () => {
                     image={post.image}
                     text={post.text}
                     date={post.date}
+                    commentsExpanded={post.commentsExpanded}
                 />
             ))}
         </ul>

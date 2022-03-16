@@ -18,13 +18,25 @@ const usePosts = () => {
             text: inputs.text,
             hashtag: inputs.hashtag,
             image: inputs.image,
-            date: new Date().toLocaleDateString("ru-RU", options)
+            date: new Date().toLocaleDateString("ru-RU", options),
+            commentsExpanded: false,
         }
         setPosts(prev => [...prev, newPost])
     }
 
     const deletePost = (id) => {
         setPosts((prev) => prev.filter((post) => post.id !== id))
+    }
+
+    const collapseComments = (id) => {
+        setPosts(prev => prev.map(post => {
+            if (post.id === id) {
+                return {
+                    ...post,
+                    commentsExpanded: !post.commentsExpanded,
+                }
+            }
+        }))
     }
 
     useEffect(() => {
@@ -42,6 +54,7 @@ const usePosts = () => {
         posts,
         createPost,
         deletePost,
+        collapseComments,
     }
 }
 
