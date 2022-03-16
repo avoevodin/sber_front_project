@@ -28,11 +28,13 @@ const PostItem = ({ id, title, hashtag, image, text, date, commentsExpanded, ind
                     <div className="d-flex flex-column col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">{title}</h5>
-                            <p className="card-text">{text}</p>
+                            <hr />
+                            <div className="card-text multiline-text">{text}</div>
                             <p className="card-text">
                                 <small className="text-muted">{hashtag}</small>
                             </p>
                         </div>
+                        <hr />
                         <div className="d-flex justify-content-end align-items-center mx-1">
                             <div className="d-flex flex-column align-items-end mx-2 my-2">
                                 <p className="card-text">

@@ -7,7 +7,7 @@ const CommentItem = ({ text, date }) => {
                 </div>
                 <div className="card-body">
                     <blockquote className="blockquote mb-0">
-                        <p>{text}</p>
+                        <div className="multiline-text">{text}</div>
                     </blockquote>
                 </div>
             </div>
