@@ -19,10 +19,17 @@ const MainForm = () => {
         });
     };
 
-    console.log({ inputs })
+    const submitHandler = (e) => {
+        e.preventDefault()
+        // how to optimize?
+        if (inputs.title && inputs.text) {
+            createPost(inputs)
+            setInputs(initInputs)
+        }
+    }
 
     return (
-        <form className="d-flex flex-column justify-content-center">
+        <form onSubmit={submitHandler} className="d-flex flex-column justify-content-center">
             <div className="d-flex mb-2">
                 <div className="d-flex flex-column justify-content-between me-2 mb-2">
                     <div className="mb-2">
