@@ -33,17 +33,17 @@ const PostItem = ({ id, title, hashtag, image, text, date, commentsExpanded, ind
                             <p className="card-text">
                                 <small className="text-muted">{hashtag}</small>
                             </p>
+                            <hr />
                         </div>
-                        <hr />
                         <div className="d-flex justify-content-end align-items-center mx-1">
-                            <div className="d-flex flex-column align-items-end mx-2 my-2">
+                            <div className="d-flex flex-column align-items-end mx-2">
                                 <p className="card-text">
                                     <small className="fw-bolder text-muted">{date}</small>
                                 </p>
                                 <button
                                     onClick={deleteHandler}
                                     type="button"
-                                    className="btn btn-danger btn-sm"
+                                    className="btn btn-link link-danger btn-lg"
                                 >
                                     <BsFillTrashFill />
                                 </button>
@@ -76,7 +76,7 @@ const PostItem = ({ id, title, hashtag, image, text, date, commentsExpanded, ind
                     </div>
                 </div>
             </div >
-        </li>
+        </li >
     );
 };
 

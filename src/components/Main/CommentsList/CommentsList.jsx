@@ -29,6 +29,7 @@ const CommentsList = ({ postId }) => {
                                 key={comment.id}
                                 text={comment.text}
                                 date={comment.date}
+                                id={comment.id}
                             />
                         ))}
                 </ul>
