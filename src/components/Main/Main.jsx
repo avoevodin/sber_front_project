@@ -1,6 +1,6 @@
 import MainContextProvider from "../../contexts/MainContext"
 import MainForm from "./MainForm/MainForm"
-import PostsList from "./MainPosts/PostsList"
+import PostsList from "./PostsList/PostsList"
 
 const Main = () => {
 
