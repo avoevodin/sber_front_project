@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react"
-import { CommentsContext } from "../contexts/CommentsContext"
+import { useEffect, useState } from "react"
 import { LSPostsKey, options } from "../settings"
 
 const { v4: uuidv4 } = require("uuid")

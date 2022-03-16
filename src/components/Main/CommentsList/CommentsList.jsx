@@ -24,13 +24,11 @@ const CommentsList = ({ postId }) => {
                 <ul className="list-group list-group-flush">
                     {comments
                         .filter((comment) => comment.postId === postId)
-                        .map((comment, index) => (
+                        .map((comment) => (
                             <CommentItem
                                 key={comment.id}
-                                postId={postId}
                                 text={comment.text}
                                 date={comment.date}
-                                index={index}
                             />
                         ))}
                 </ul>

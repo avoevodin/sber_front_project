@@ -1,4 +1,4 @@
-const CommentItem = ({ postId, text, date, index }) => {
+const CommentItem = ({ text, date }) => {
     return (
         <li className="list-group-item">
             <div className="my-2">
