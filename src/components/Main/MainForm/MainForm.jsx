@@ -26,6 +26,7 @@ const MainForm = () => {
 
         const trimInputs = Object.fromEntries(Object.entries(inputs).map(([key, value]) => [key, value.trim()]))
         // how to optimize?
+        // TODO
         if (inputs.title && inputs.text) {
             createPost(trimInputs)
             setInputs(initInputs)
