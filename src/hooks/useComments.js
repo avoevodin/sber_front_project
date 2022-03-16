@@ -15,6 +15,10 @@ const useComments = () => {
         setComments(prev => [...prev, newComment])
     }
 
+    const deleteCommentsByPost = (postId) => {
+        return setComments(prev => prev.filter((comment) => comment.postId !== postId))
+    }
+
     useEffect(() => {
         const dataFromLS = localStorage.getItem(LSCommentsKey)
         if (dataFromLS) {
@@ -28,7 +32,8 @@ const useComments = () => {
 
     return {
         comments,
-        createComment
+        createComment,
+        deleteCommentsByPost,
     }
 }
 

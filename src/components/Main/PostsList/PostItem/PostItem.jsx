@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { MainContext } from "../../../../contexts/MainContext";
 import { BsFillTrashFill } from "react-icons/bs";
+import CommentsList from "../../CommentsList/CommentsList";
 
 const PostItem = ({ id, title, hashtag, image, text, date, commentsExpanded, index }) => {
     const { deletePost, collapseComments } = useContext(MainContext);
@@ -58,10 +59,8 @@ const PostItem = ({ id, title, hashtag, image, text, date, commentsExpanded, ind
                     <div className="row">
                         <div className="col">
                             <div className="collapse multi-collapse" id={`multiCollapseComments${index}`}>
-                                <div className="card card-body">
-                                    Some placeholder content for the first collapse component of
-                                    this multi-collapse example. This panel is hidden by default but
-                                    revealed when the user activates the relevant trigger.
+                                <div>
+                                    <CommentsList key={id} postId={id} />
                                 </div>
                             </div>
                         </div>
