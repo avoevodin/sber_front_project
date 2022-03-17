@@ -50,7 +50,7 @@ const CommentsList = ({ postId }) => {
                         placeholder="text your comment"
                     />
                 </div>
-                <button type="submit" className="btn btn-success col-4">
+                <button type="submit" className="btn btn-success col-6">
                     Add comment
                 </button>
             </form>
