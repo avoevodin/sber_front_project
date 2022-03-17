@@ -7,7 +7,7 @@ const PostsList = () => {
     const { posts } = useContext(MainContext);
     return (
         <CommentsContextProvider>
-            <ul className="list-group list-group-flush">
+            <ul className="d-flex flex-column-reverse list-group list-group-flush">
                 {posts.map((post, index) => (
                     <PostItem
                         key={post.id}
