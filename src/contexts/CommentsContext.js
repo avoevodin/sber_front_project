@@ -12,8 +12,7 @@ const CommentsContextProvider = ({ children }) => {
     )
 }
 
-export default CommentsContextProvider
-
 export {
-    CommentsContext
+    CommentsContextProvider as default,
+    CommentsContext,
 }

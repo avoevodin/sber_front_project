@@ -12,8 +12,7 @@ const MainContextProvider = ({ children }) => {
     )
 }
 
-export default MainContextProvider
-
 export {
-    MainContext
+    MainContextProvider as default,
+    MainContext,
 }
