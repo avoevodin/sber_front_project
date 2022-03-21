@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useContext } from 'react'
 import useComments from '../hooks/useComments'
 
 const CommentsContext = createContext()
@@ -18,7 +18,8 @@ function CommentsContextProvider({ children }) {
   )
 }
 
+const useCommentsContext = () => useContext(CommentsContext)
 export default CommentsContextProvider
 export {
-  CommentsContext,
+  useCommentsContext,
 }

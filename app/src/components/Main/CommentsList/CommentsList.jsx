@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react'
-import { CommentsContext } from '../../../contexts/CommentsContext'
+import { useState } from 'react'
+import { useCommentsContext } from '../../../contexts/CommentsContext'
 import CommentItem from './CommentItem/CommentItem'
 
 function CommentsList({ postId }) {
-  const { comments, createComment } = useContext(CommentsContext)
+  const { comments, createComment } = useCommentsContext()
   const [input, setInput] = useState('')
 
   const changeHandler = (e) => setInput(e.target.value)

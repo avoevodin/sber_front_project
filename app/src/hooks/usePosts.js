@@ -35,13 +35,12 @@ const usePosts = () => {
   }
 
   useEffect(() => {
-    const dataFromLS = JSON.parse(localStorage.getItem(LSPostsKey))
-    if (dataFromLS) {
-      setPosts(dataFromLS.map((post) => ({
+    fetch('http://localhost:3000/api/v1/posts/')
+      .then((response) => response.json())
+      .then((dataFromServer) => setPosts(dataFromServer.map((post) => ({
         ...post,
         commentsExpanded: false,
-      })))
-    }
+      }))))
   }, [])
 
   useEffect(() => {

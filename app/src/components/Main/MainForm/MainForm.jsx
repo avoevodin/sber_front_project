@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react'
-import { MainContext } from '../../../contexts/MainContext'
+import { useState } from 'react'
+import { useMainContext } from '../../../contexts/MainContext'
 
 const initInputs = {
   title: '',
@@ -10,7 +10,7 @@ const initInputs = {
 
 function MainForm() {
   const [inputs, setInputs] = useState(initInputs)
-  const { createPost } = useContext(MainContext)
+  const { createPost } = useMainContext()
 
   const changeHandler = (e) => {
     const { name, value } = e.target

@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useContext } from 'react'
 import usePosts from '../hooks/usePosts'
 
 const MainContext = createContext()
@@ -18,7 +18,8 @@ function MainContextProvider({ children }) {
   )
 }
 
+const useMainContext = () => useContext(MainContext)
 export default MainContextProvider
 export {
-  MainContext,
+  useMainContext,
 }

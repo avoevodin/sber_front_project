@@ -1,10 +1,9 @@
-import { useContext } from 'react'
 import CommentsContextProvider from '../../../contexts/CommentsContext'
-import { MainContext } from '../../../contexts/MainContext'
+import { useMainContext } from '../../../contexts/MainContext'
 import PostItem from './PostItem/PostItem'
 
 function PostsList() {
-  const { posts } = useContext(MainContext)
+  const { posts } = useMainContext()
   return (
     <CommentsContextProvider>
       <ul className="d-flex flex-column-reverse list-group list-group-flush">

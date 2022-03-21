@@ -23,7 +23,7 @@ const db = {
       title: 'Quit it, Bart!',
       text: 'If anyone wants me,\nI\'ll be in my room.',
       hashtag: '#BAAAAAART',
-      image: 'https://upload.wikimedia.org/wikipedia/en/a/aa/Bart_Simpson_200px.png',
+      image: 'https://upload.wikimedia.org/wikipedia/ru/e/ec/Lisa_Simpson.png',
       date: new Date().toLocaleDateString('ru-RU', options),
     },
     {
@@ -31,7 +31,7 @@ const db = {
       title: 'Oh, Homie.',
       text: 'You have no idea what it\'s like,\nbeing married to you.',
       hashtag: '#mmmmm',
-      image: 'https://upload.wikimedia.org/wikipedia/en/a/aa/Bart_Simpson_200px.png',
+      image: 'https://upload.wikimedia.org/wikipedia/ru/0/0b/Marge_Simpson.png',
       date: new Date().toLocaleDateString('ru-RU', options),
     },
   ],
