@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { BsFillTrashFill } from 'react-icons/bs'
 import { useMainContext } from '../../../../contexts/MainContext'
 import CommentsList from '../../CommentsList/CommentsList'
 import { useCommentsContext } from '../../../../contexts/CommentsContext'
+import styles from './postItem.module.css'
 
 function PostItem({
   id, title, hashtag, image, text, date, commentsExpanded, index,
@@ -16,7 +18,7 @@ function PostItem({
 
   const collapseCommentsHandler = () => collapseComments(id)
   return (
-    <li className="list-group-item">
+    <li className={`list-group-item ${styles.list_item_without_borders}`}>
       <div className="my-3">
         <div className="row g-0">
           <div className="col-md-4">
