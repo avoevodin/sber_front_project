@@ -1,6 +1,5 @@
-const Footer = () => {
-
-    return null
+function Footer() {
+  return null
 }
 
 export default Footer
