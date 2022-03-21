@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { BsFillTrashFill } from 'react-icons/bs'
 import { useMainContext } from '../../../../contexts/MainContext'
 import CommentsList from '../../CommentsList/CommentsList'
@@ -79,6 +78,7 @@ function PostItem({
           </div>
         </div>
       </div>
+      <hr />
     </li>
   )
 }

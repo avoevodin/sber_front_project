@@ -5,11 +5,6 @@ const options = {
   second: '2-digit',
 }
 
-const LSPostsKey = 'posts'
-const LSCommentsKey = 'comments'
-
 module.exports = {
   options,
-  LSPostsKey,
-  LSCommentsKey,
 }

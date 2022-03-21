@@ -1,4 +1,4 @@
-const { options } = require('../app/src/settings')
+const { options } = require('./settings')
 
 const db = {
   posts: [
