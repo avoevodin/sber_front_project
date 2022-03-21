@@ -1,5 +1,5 @@
 import MainContextProvider from '../../contexts/MainContext'
-import MainForm from './MainForm/MainForm'
+import CreatePostForm from './CreatePostForm/CreatePostForm'
 import PostsList from './PostsList/PostsList'
 
 function Main() {
@@ -7,7 +7,7 @@ function Main() {
     <MainContextProvider>
       <div className="container d-flex">
         <div className="container col-4">
-          <MainForm />
+          <CreatePostForm />
         </div>
         <div className="d-flex">
           <div className="vr" />

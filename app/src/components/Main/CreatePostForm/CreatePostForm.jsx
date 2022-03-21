@@ -8,7 +8,7 @@ const initInputs = {
   text: '',
 }
 
-function MainForm() {
+function CreatePostForm() {
   const [inputs, setInputs] = useState(initInputs)
   const { createPost } = useMainContext()
 
@@ -93,4 +93,4 @@ function MainForm() {
   )
 }
 
-export default MainForm
+export default CreatePostForm

@@ -45,6 +45,7 @@ const usePosts = () => {
 
   useEffect(() => {
     localStorage.setItem(LSPostsKey, JSON.stringify(posts))
+    fetch('http://localhost:3000/api/v1/posts/')
   }, [posts])
 
   return {
