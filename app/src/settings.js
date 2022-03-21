@@ -8,7 +8,7 @@ const options = {
 const LSPostsKey = "posts"
 const LSCommentsKey = "comments"
 
-export {
+module.exports = {
     options,
     LSPostsKey,
     LSCommentsKey
