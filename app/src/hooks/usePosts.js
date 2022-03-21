@@ -15,8 +15,18 @@ const usePosts = () => {
     setPosts((prev) => [...prev, newPost])
   }
 
-  const deletePost = (id) => {
+  const deletePost = async (id) => {
+    const res = await fetch(`http://localhost:3000/api/v1/posts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (res.status !== 200) return false
+
     setPosts((prev) => prev.filter((post) => post.id !== id))
+    return true
   }
 
   const collapseComments = (id) => {

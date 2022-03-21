@@ -7,7 +7,7 @@ const useComments = () => {
 
   const createComment = async (inputs) => {
     const newComment = {
-      id: uuidv4(),
+      id: Date.now(),
       postId: inputs.postId,
       text: inputs.text,
       date: new Date().toLocaleDateString('ru-RU', options),

@@ -3,7 +3,7 @@ const { options } = require('./settings')
 const db = {
   posts: [
     {
-      id: 1,
+      id: '1',
       title: 'Dooh!',
       text: 'Why you little!',
       hashtag: '#doh',
@@ -11,7 +11,7 @@ const db = {
       date: new Date().toLocaleDateString('ru-RU', options),
     },
     {
-      id: 2,
+      id: '2',
       title: 'Eat My Shorts!',
       text: 'I\'m Bart Simpson,\nWho the Hell are You?',
       hashtag: '#caramba',
@@ -19,7 +19,7 @@ const db = {
       date: new Date().toLocaleDateString('ru-RU', options),
     },
     {
-      id: 3,
+      id: '3',
       title: 'Quit it, Bart!',
       text: 'If anyone wants me,\nI\'ll be in my room.',
       hashtag: '#BAAAAAART',
@@ -27,7 +27,7 @@ const db = {
       date: new Date().toLocaleDateString('ru-RU', options),
     },
     {
-      id: 4,
+      id: '4',
       title: 'Oh, Homie.',
       text: 'You have no idea what it\'s like,\nbeing married to you.',
       hashtag: '#mmmmm',

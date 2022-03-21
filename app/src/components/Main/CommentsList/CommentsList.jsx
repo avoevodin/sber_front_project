@@ -1,20 +1,31 @@
-import { useState } from 'react'
 import { useCommentsContext } from '../../../contexts/CommentsContext'
+import CreateCommentForm from './CommentItem/CreateCommentForm/CreateCommentForm'
 import CommentItem from './CommentItem/CommentItem'
 
 function CommentsList({ postId }) {
   const { comments, createComment } = useCommentsContext()
-  const [input, setInput] = useState('')
 
-  const changeHandler = (e) => setInput(e.target.value)
-
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
+    const formData = Object.fromEntries(new FormData(e.target).entries())
+    const res = await fetch('http://localhost:3000/api/v1/comments/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formData,
+        postId,
+      }),
+    })
 
-    const inputTrim = input.trim()
-    if (inputTrim) {
-      createComment({ postId, text: inputTrim })
-      setInput('')
+    if (res.status === 201) {
+      const commentFromServer = await res.json()
+      createComment({ commentFromServer })
+      e.target.reset()
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('Wrong data')
     }
   }
 
@@ -36,24 +47,7 @@ function CommentsList({ postId }) {
       ) : (
         <p className="text-center text-muted">No comments yet...</p>
       )}
-      <form
-        onSubmit={submitHandler}
-        className="d-flex flex-column align-items-center"
-      >
-        <div className="mb-3">
-          <textarea
-            type="text"
-            className="form-control"
-            cols="50"
-            value={input}
-            onChange={changeHandler}
-            placeholder="text your comment"
-          />
-        </div>
-        <button type="submit" className="btn btn-success col-6">
-          Add comment
-        </button>
-      </form>
+      <CreateCommentForm onSubmit={submitHandler} />
     </>
   )
 }

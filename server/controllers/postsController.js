@@ -23,7 +23,20 @@ const createPost = (req, res) => {
   return res.status(201).json(newPost)
 }
 
+const deletePost = (req, res) => {
+  const { id } = req.params
+  const index = db.posts.findIndex((post) => post.id === id)
+
+  if (index > -1) {
+    db.posts.splice(index, 1)
+    return res.sendStatus(200)
+  }
+
+  return res.sendStatus(404)
+}
+
 module.exports = {
   getPosts,
   createPost,
+  deletePost,
 }
