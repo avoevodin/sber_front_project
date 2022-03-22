@@ -46,9 +46,25 @@ const deletePost = (req, res) => {
   return res.sendStatus(404)
 }
 
+const updatePost = (req, res) => {
+  const { id } = req.params
+  const currentPostIndex = db.posts.findIndex((post) => post.id === id)
+
+  if (currentPostIndex === -1) return res.sendStatus(404)
+  if (!Object.values(req.body).every((value) => !!value)) return res.sendStatus(400)
+
+  db.posts[currentPostIndex] = {
+    ...db.posts[currentPostIndex],
+    ...req.body,
+  }
+
+  return res.json(db.posts[currentPostIndex])
+}
+
 module.exports = {
   getPosts,
   createPost,
   deletePost,
   getCurrentPost,
+  updatePost,
 }
