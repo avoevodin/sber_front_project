@@ -1,6 +1,6 @@
 const express = require('express')
 const {
-  getComments, createComment, deleteComment, deleteCommentsByPost,
+  getComments, createComment, deleteComment,
 } = require('../controllers/commentsController')
 
 const commentsRouter = express.Router()
@@ -10,7 +10,6 @@ commentsRouter.route('/')
 
 commentsRouter.route('/post/:postId')
   .get(getComments)
-  .delete(deleteCommentsByPost)
 
 commentsRouter.route('/:id')
   .delete(deleteComment)

@@ -35,15 +35,8 @@ const deleteComment = (req, res) => {
   return res.sendStatus(404)
 }
 
-const deleteCommentsByPost = (req, res) => {
-  const { postId } = req.params
-  db.comments = db.comments.filter((comment) => comment.postId !== postId)
-  return res.sendStatus(200)
-}
-
 module.exports = {
   getComments,
   createComment,
   deleteComment,
-  deleteCommentsByPost,
 }

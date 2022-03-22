@@ -13,10 +13,6 @@ const useComments = ({ postId }) => {
     setComments((prev) => [...prev, newComment])
   }
 
-  const deleteCommentsByPost = () => setComments((prev) => {
-    prev.filter((comment) => comment.postId !== postId)
-  })
-
   const deleteComment = async (id) => {
     const res = await fetch(`http://localhost:3000/api/v1/comments/${id}`, {
       method: 'DELETE',
@@ -43,7 +39,6 @@ const useComments = ({ postId }) => {
   return {
     comments,
     createComment,
-    deleteCommentsByPost,
     deleteComment,
   }
 }

@@ -1,6 +1,5 @@
 import { BsFillTrashFill } from 'react-icons/bs'
 import CommentsList from '../../CommentsList/CommentsList'
-import { useCommentsContext } from '../../../../contexts/CommentsContext'
 import styles from './postItem.module.css'
 import { useMainContext } from '../../../../contexts/MainContext'
 
@@ -8,11 +7,9 @@ function PostItem({
   id, title, hashtag, image, text, date, commentsExpanded, index,
 }) {
   const { deletePost, collapseComments } = useMainContext()
-  const { deleteCommentsByPost } = useCommentsContext()
 
   const deleteHandler = () => {
-    const postDeleted = deletePost(id)
-    if (postDeleted) deleteCommentsByPost(id)
+    deletePost(id)
   }
 
   const collapseCommentsHandler = () => collapseComments(id)

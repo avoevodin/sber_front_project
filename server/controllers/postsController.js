@@ -28,6 +28,7 @@ const deletePost = (req, res) => {
 
   if (index > -1) {
     db.posts.splice(index, 1)
+    db.comments = db.comments.filter((comment) => comment.postId !== id)
     return res.sendStatus(200)
   }
 
