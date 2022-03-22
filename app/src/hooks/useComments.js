@@ -17,7 +17,20 @@ const useComments = ({ postId }) => {
     prev.filter((comment) => comment.postId !== postId)
   })
 
-  const deleteComment = (id) => setComments((prev) => prev.filter((comment) => comment.id !== id))
+  const deleteComment = async (id) => {
+    const res = await fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (res.status !== 200) return false
+
+    const commentsFromServer = await res.json()
+    setComments(commentsFromServer)
+    return true
+  }
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/comments/post/${postId}`)

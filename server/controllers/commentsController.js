@@ -27,8 +27,9 @@ const deleteComment = (req, res) => {
   const index = db.comments.findIndex((comment) => comment.id === id)
 
   if (index > -1) {
+    const { postId } = db.comments[index]
     db.comments.splice(index, 1)
-    return res.sendStatus(200)
+    return res.status(200).json(db.comments.filter((comment) => comment.postId === postId))
   }
 
   return res.sendStatus(404)

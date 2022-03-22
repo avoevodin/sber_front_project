@@ -30,7 +30,7 @@ function CommentsList({ postId }) {
 
   return (
     <>
-      {comments.length ? (
+      {comments && comments.length ? (
         <ul className="list-group list-group-flush">
           {comments
             .filter((comment) => comment.postId === postId)
