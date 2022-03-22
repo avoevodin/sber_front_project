@@ -37,9 +37,8 @@ function CommentsList({ postId }) {
             .map((comment) => (
               <CommentItem
                 key={comment.id}
-                text={comment.text}
-                date={comment.date}
-                id={comment.id}
+                commentData={comment}
+                postId={postId}
               />
             ))}
         </ul>

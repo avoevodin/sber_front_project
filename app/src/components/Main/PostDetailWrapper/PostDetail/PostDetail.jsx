@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
-import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs'
+import { BsFillTrashFill, BsPencilSquare, BsArrowClockwise } from 'react-icons/bs'
 import { useMainContext } from '../../../../contexts/MainContext'
 import Modal from '../../../Modal/Modal'
 import PostForm from '../../PostForm/PostForm'
@@ -88,6 +88,13 @@ function PostDetail({ postId }) {
                     <small className="fw-bolder text-muted">{post.date}</small>
                   </p>
                   <div className="d-flex">
+                    <button
+                      type="button"
+                      onClick={() => navigate(-1)}
+                      className="btn btn-link link-primary btn-lg"
+                    >
+                      <BsArrowClockwise />
+                    </button>
                     <button
                       onClick={openModal}
                       type="button"
