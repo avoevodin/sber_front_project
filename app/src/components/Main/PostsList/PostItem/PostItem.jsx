@@ -1,18 +1,18 @@
 import { BsFillTrashFill } from 'react-icons/bs'
-import CommentsList from '../../CommentsList/CommentsList'
+import { Link } from 'react-router-dom'
 import styles from './postItem.module.css'
 import { useMainContext } from '../../../../contexts/MainContext'
+import CommentsToggleBar from '../../CommentsToggleBar/CommentsToggleBar'
 
 function PostItem({
   id, title, hashtag, image, text, date, commentsExpanded, index,
 }) {
-  const { deletePost, collapseComments } = useMainContext()
+  const { deletePost } = useMainContext()
 
   const deleteHandler = () => {
     deletePost(id)
   }
 
-  const collapseCommentsHandler = () => collapseComments(id)
   return (
     <li className={`list-group-item ${styles.list_item_without_borders}`}>
       <div className="my-3">
@@ -26,7 +26,7 @@ function PostItem({
           </div>
           <div className="d-flex flex-column col-md-8">
             <div className="card-body">
-              <h5 className="card-title">{title}</h5>
+              <Link to={`/posts/${id}`} className="card-title">{title}</Link>
               <hr />
               <div className="card-text multiline-text">{text}</div>
               <p className="card-text">
@@ -50,31 +50,8 @@ function PostItem({
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column align-items-center container my-2">
-          <p>
-            <a
-              className="btn btn-link text-muted"
-              data-bs-toggle="collapse"
-              href={`#multiCollapseComments${index}`}
-              role="button"
-              aria-expanded={commentsExpanded}
-              aria-controls="multiCollapseComments"
-              onClick={collapseCommentsHandler}
-            >
-              {commentsExpanded ? 'Hide comments' : 'Show comments'}
-            </a>
-          </p>
-          <div className="row">
-            <div className="col">
-              <div className="collapse multi-collapse" id={`multiCollapseComments${index}`}>
-                <div>
-                  <CommentsList key={id} postId={id} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+      <CommentsToggleBar key={id} postId={id} commentsExpanded={commentsExpanded} index={index} />
       <hr />
     </li>
   )

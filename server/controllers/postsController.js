@@ -7,6 +7,17 @@ const getPosts = (req, res) => {
   res.json(dataForClient)
 }
 
+const getCurrentPost = (req, res) => {
+  const { id } = req.params
+  const dataForClient = db.posts.find((post) => post.id === id)
+
+  if (!dataForClient) {
+    return res.sendStatus(404)
+  }
+
+  setTimeout(() => res.json(dataForClient), 1e1)
+}
+
 const createPost = (req, res) => {
   const dataFromClient = req.body
 
@@ -39,4 +50,5 @@ module.exports = {
   getPosts,
   createPost,
   deletePost,
+  getCurrentPost,
 }
