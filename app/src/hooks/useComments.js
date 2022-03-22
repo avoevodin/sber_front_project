@@ -1,36 +1,31 @@
 import { useEffect, useState } from 'react'
 
-const options = {}
-const LSCommentsKey = ''
-const useComments = () => {
+const useComments = ({ postId }) => {
   const [comments, setComments] = useState([])
 
   const createComment = async (inputs) => {
     const newComment = {
-      id: Date.now(),
+      id: inputs.id,
       postId: inputs.postId,
       text: inputs.text,
-      date: new Date().toLocaleDateString('ru-RU', options),
+      date: inputs.date,
     }
     setComments((prev) => [...prev, newComment])
   }
 
-  const deleteCommentsByPost = (postId) => setComments((prev) => {
+  const deleteCommentsByPost = () => setComments((prev) => {
     prev.filter((comment) => comment.postId !== postId)
   })
 
   const deleteComment = (id) => setComments((prev) => prev.filter((comment) => comment.id !== id))
 
   useEffect(() => {
-    const dataFromLS = JSON.parse(localStorage.getItem(LSCommentsKey))
-    if (dataFromLS) {
-      setComments(dataFromLS)
-    }
+    fetch(`http://localhost:3000/api/v1/comments/post/${postId}`)
+      .then((response) => response.json())
+      .then((dataFromServer) => {
+        setComments(dataFromServer)
+      })
   }, [])
-
-  useEffect(() => {
-    localStorage.setItem(LSCommentsKey, JSON.stringify(comments))
-  }, [comments])
 
   return {
     comments,

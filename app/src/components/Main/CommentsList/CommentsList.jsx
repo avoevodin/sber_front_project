@@ -1,10 +1,9 @@
 import { useCommentsContext } from '../../../contexts/CommentsContext'
-import CreateCommentForm from './CommentItem/CreateCommentForm/CreateCommentForm'
-import CommentItem from './CommentItem/CommentItem'
+import CommentItem from '../CommentItem/CommentItem'
+import CreateCommentForm from '../CreateCommentForm/CreateCommentForm'
 
 function CommentsList({ postId }) {
   const { comments, createComment } = useCommentsContext()
-
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())

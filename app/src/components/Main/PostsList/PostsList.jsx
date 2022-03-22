@@ -5,11 +5,10 @@ import PostItem from './PostItem/PostItem'
 function PostsList() {
   const { posts } = useMainContext()
   return (
-    <CommentsContextProvider>
-      <ul className="d-flex flex-column-reverse list-group">
-        {posts.map((post, index) => (
+    <ul className="d-flex flex-column-reverse list-group">
+      {posts.map((post, index) => (
+        <CommentsContextProvider key={post.id} postId={post.id}>
           <PostItem
-            key={post.id}
             id={post.id}
             title={post.title}
             hashtag={post.hashtag}
@@ -19,9 +18,9 @@ function PostsList() {
             commentsExpanded={post.commentsExpanded}
             index={index}
           />
-        ))}
-      </ul>
-    </CommentsContextProvider>
+        </CommentsContextProvider>
+      ))}
+    </ul>
   )
 }
 

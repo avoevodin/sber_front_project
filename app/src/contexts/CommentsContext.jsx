@@ -3,14 +3,14 @@ import useComments from '../hooks/useComments'
 
 const CommentsContext = createContext()
 
-function CommentsContextProvider({ children }) {
+function CommentsContextProvider({ children, postId }) {
   const {
     comments, createComment, deleteCommentsByPost, deleteComment,
-  } = useComments()
+  } = useComments({ postId })
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <CommentsContext.Provider value={{
-      comments, createComment, deleteCommentsByPost, deleteComment,
+      comments, postId, createComment, deleteCommentsByPost, deleteComment,
     }}
     >
       {children}

@@ -10,8 +10,7 @@ const getPosts = (req, res) => {
 const createPost = (req, res) => {
   const dataFromClient = req.body
 
-  if (!dataFromClient
-    || !Object.values(req.body).every((value) => !!value)) return res.sendStatus(400)
+  if (!Object.values(dataFromClient).every((value) => !!value)) return res.sendStatus(400)
 
   const newPost = {
     ...dataFromClient,

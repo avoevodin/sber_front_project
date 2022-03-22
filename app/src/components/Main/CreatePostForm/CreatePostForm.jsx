@@ -7,6 +7,7 @@ function CreatePostForm() {
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
+
     const res = await fetch('http://localhost:3000/api/v1/posts/', {
       method: 'POST',
       headers: {

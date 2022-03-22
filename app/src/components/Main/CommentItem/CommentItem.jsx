@@ -1,5 +1,5 @@
 import { TiTrash } from 'react-icons/ti'
-import { useCommentsContext } from '../../../../contexts/CommentsContext'
+import { useCommentsContext } from '../../../contexts/CommentsContext'
 
 function CommentItem({ text, date, id }) {
   const { deleteComment } = useCommentsContext()

@@ -35,6 +35,7 @@ const db = {
       date: new Date().toLocaleDateString('ru-RU', options),
     },
   ],
+  comments: [],
 }
 
 module.exports = {
