@@ -7,7 +7,7 @@ function handleCollapseField(post, reverse = false) {
   }
 }
 
-const usePosts = () => {
+const usePosts = (loadPosts) => {
   const [posts, setPosts] = useState([])
 
   const createPost = (inputs) => {
@@ -39,9 +39,13 @@ const usePosts = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/v1/posts/')
-      .then((response) => response.json())
-      .then((dataFromServer) => setPosts(dataFromServer.map((post) => (handleCollapseField(post)))))
+    if (loadPosts) {
+      fetch('http://localhost:3000/api/v1/posts/')
+        .then((response) => response.json())
+        .then((dataFromServer) => setPosts(dataFromServer.map(
+          (post) => (handleCollapseField(post)),
+        )))
+    }
   }, [])
 
   return {

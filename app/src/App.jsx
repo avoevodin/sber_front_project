@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import Footer from './components/Footer/Footer'
-import PostDetail from './components/Main/PostDetail/PostDetail'
+import PostDetailWrapper from './components/Main/PostDetailWrapper/PostDetailWrapper'
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <div className="container py-5">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/posts/:postId" element={<PostDetail />} />
+          <Route path="/posts/:postId" element={<PostDetailWrapper />} />
         </Routes>
       </div>
       <Footer />

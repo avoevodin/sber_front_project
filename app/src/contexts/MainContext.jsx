@@ -3,10 +3,10 @@ import usePosts from '../hooks/usePosts'
 
 const MainContext = createContext()
 
-function MainContextProvider({ children }) {
+function MainContextProvider({ children, loadPosts = true }) {
   const {
     posts, createPost, deletePost, collapseComments,
-  } = usePosts()
+  } = usePosts(loadPosts)
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <MainContext.Provider value={{

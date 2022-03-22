@@ -1,11 +1,12 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
+import { BsFillTrashFill } from 'react-icons/bs'
+import { useMainContext } from '../../../../contexts/MainContext'
 
-function PostDetail() {
-  const { postId } = useParams()
-
+function PostDetail({ postId }) {
   const currentController = useRef(new AbortController()).current
-
+  const navigate = useNavigate()
+  const { deletePost } = useMainContext()
   const [post, setPost] = useState({})
 
   useEffect(() => {
@@ -19,6 +20,11 @@ function PostDetail() {
       currentController.abort()
     }
   }, [])
+
+  const deleteHandler = () => {
+    deletePost(postId)
+    navigate(-1)
+  }
 
   const content = () => {
     if (!post.id) return <strong>Loading...</strong>
@@ -34,6 +40,20 @@ function PostDetail() {
               <h5 className="card-title">{post.title}</h5>
               <p className="card-text">{post.text}</p>
               <p className="card-text"><small className="text-muted">{post.hashtag}</small></p>
+            </div>
+            <div className="d-flex justify-content-end align-items-center mx-1">
+              <div className="d-flex flex-column align-items-end mx-2">
+                <p className="card-text">
+                  <small className="fw-bolder text-muted">{post.date}</small>
+                </p>
+                <button
+                  onClick={deleteHandler}
+                  type="button"
+                  className="btn btn-link link-danger btn-lg"
+                >
+                  <BsFillTrashFill />
+                </button>
+              </div>
             </div>
           </div>
         </div>
