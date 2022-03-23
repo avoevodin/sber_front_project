@@ -22,6 +22,21 @@ const createComment = (req, res) => {
   return res.status(201).json(newComment)
 }
 
+const updateComment = (req, res) => {
+  const { id } = req.params
+  const index = db.comments.findIndex((comment) => comment.id === id)
+
+  if (index === -1) return res.sendStatus(404)
+  if (!Object.values(req.body).every((value) => !!value)) return res.sendStatus(400)
+
+  db.comments[index] = {
+    ...db.comments[index],
+    ...req.body,
+  }
+
+  return res.json(db.comments[index])
+}
+
 const deleteComment = (req, res) => {
   const { id } = req.params
   const index = db.comments.findIndex((comment) => comment.id === id)
@@ -38,5 +53,6 @@ const deleteComment = (req, res) => {
 module.exports = {
   getComments,
   createComment,
+  updateComment,
   deleteComment,
 }

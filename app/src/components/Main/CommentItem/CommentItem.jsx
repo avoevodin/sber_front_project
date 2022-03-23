@@ -1,5 +1,6 @@
 import { TiTrash } from 'react-icons/ti'
 import { BsPencilFill } from 'react-icons/bs'
+import { useState } from 'react'
 import { useCommentsContext } from '../../../contexts/CommentsContext'
 import Modal from '../../Modal/Modal'
 import CommentForm from '../CommentForm/CommentForm'
@@ -22,8 +23,27 @@ function CommentItem({
     setViewModal(false)
   }
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
+    const formData = Object.fromEntries(new FormData(e.target).entries())
+    const res = await fetch(`http://localhost:3000/api/v1/comments/${comment.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+
+    if (res.status === 200) {
+      const updatedComment = await res.json()
+
+      setComment(updatedComment)
+      e.target.reset()
+      closeModal()
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('Wrong data')
+    }
   }
 
   return (
@@ -62,7 +82,7 @@ function CommentItem({
         state={viewModal}
         onClose={closeModal}
       >
-        <CommentForm onSubmit={submitHandler} />
+        <CommentForm onSubmit={submitHandler} text={comment.text} />
       </Modal>
     </>
   )
