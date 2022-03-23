@@ -77,7 +77,7 @@ function PostDetail({ postId }) {
             <div className="col-md-8">
               <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>
-                <p className="card-text">{post.text}</p>
+                <p className="card-text multiline-text">{post.text}</p>
                 <p className="card-text">
                   <small className="text-muted">{post.hashtag}</small>
                 </p>
