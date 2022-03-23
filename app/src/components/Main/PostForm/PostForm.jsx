@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 function PostForm({
   onSubmit, inputs = {
@@ -9,9 +9,11 @@ function PostForm({
   },
 }) {
   const formRef = useRef(null)
+  const [buttonText, setButtonText] = useState('Add post')
 
   useEffect(() => {
-    if (inputs) {
+    if (inputs.title) {
+      setButtonText('Change post')
       formRef.current.elements.title.value = inputs.title
       formRef.current.elements.image.value = inputs.image
       formRef.current.elements.hashtag.value = inputs.hashtag
@@ -62,7 +64,7 @@ function PostForm({
       </div>
       <div className="d-flex justify-content-center">
         <button type="submit" className="btn btn-primary col-6">
-          Post
+          {buttonText}
         </button>
       </div>
     </form>

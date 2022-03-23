@@ -1,9 +1,11 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 function CommentForm({ onSubmit, text = '' }) {
   const formRef = useRef(null)
+  const [buttonText, setButtonText] = useState('Add comment')
   useEffect(() => {
     if (text) {
+      setButtonText('Change comment')
       formRef.current.elements.text.value = text
     }
   }, [])
@@ -24,7 +26,7 @@ function CommentForm({ onSubmit, text = '' }) {
         />
       </div>
       <button type="submit" className="btn btn-success col-6">
-        Add comment
+        {buttonText}
       </button>
     </form>
   )
