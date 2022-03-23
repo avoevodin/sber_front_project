@@ -1,12 +1,14 @@
-import { useMainContext } from '../../../contexts/MainContext'
+import { useState } from 'react'
 import CommentsList from '../CommentsList/CommentsList'
 
 function CommentsToggleBar({
-  commentsExpanded, index = 0, postId = 0,
+  commentsExpanded = false, index = -1, postId = 0,
 }) {
-  const { collapseComments } = useMainContext()
-  const collapseCommentsHandler = () => collapseComments(postId)
+  const [commentsToggler, setCommentsToggler] = useState(commentsExpanded)
 
+  const collapseCommentsHandler = () => {
+    setCommentsToggler(!commentsToggler)
+  }
   return (
     <div className="d-flex flex-column align-items-center container my-2">
       <p>
@@ -15,11 +17,11 @@ function CommentsToggleBar({
           data-bs-toggle="collapse"
           href={`#multiCollapseComments${index}`}
           role="button"
-          aria-expanded={commentsExpanded}
+          aria-expanded={commentsToggler}
           aria-controls="multiCollapseComments"
           onClick={collapseCommentsHandler}
         >
-          {commentsExpanded ? 'Hide comments' : 'Show comments'}
+          {commentsToggler ? 'Hide comments' : 'Show comments'}
         </a>
       </p>
       <div className="row">

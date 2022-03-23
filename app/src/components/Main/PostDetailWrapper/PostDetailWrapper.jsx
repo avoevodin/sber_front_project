@@ -8,12 +8,12 @@ function PostDetailWrapper() {
   const { postId } = useParams()
   return (
     <MainContextProvider loadPosts={false}>
-      <CommentsContextProvider postId={postId}>
-        <div className="container col-8">
-          <PostDetail postId={postId} />
+      <div className="container col-8">
+        <PostDetail postId={postId} />
+        <CommentsContextProvider postId={postId}>
           <CommentsToggleBar postId={postId} />
-        </div>
-      </CommentsContextProvider>
+        </CommentsContextProvider>
+      </div>
     </MainContextProvider>
   )
 }

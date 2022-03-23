@@ -29,15 +29,6 @@ const usePosts = (loadPosts) => {
     return true
   }
 
-  const collapseComments = (id) => {
-    setPosts((prev) => prev.map((post) => {
-      if (post.id === id) {
-        return handleCollapseField(post, true)
-      }
-      return post
-    }))
-  }
-
   useEffect(() => {
     if (loadPosts) {
       fetch('http://localhost:3000/api/v1/posts/')
@@ -52,7 +43,6 @@ const usePosts = (loadPosts) => {
     posts,
     createPost,
     deletePost,
-    collapseComments,
   }
 }
 
