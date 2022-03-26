@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom'
 import { useEffect } from 'react'
+import { BsX } from 'react-icons/bs'
 import styles from './modal.module.css'
 
 function Modal({ children, state, ...rest }) {
@@ -29,6 +30,7 @@ function ModalInner({ children, onClose }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inner}>
+        <BsX className={styles.icon} />
         {children}
       </div>
     </div>

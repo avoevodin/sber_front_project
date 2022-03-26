@@ -1,5 +1,5 @@
 .wrapper {
-    position:fixed;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -11,8 +11,17 @@
 }
 
 .inner {
+    position: relative;
     background: white;
     border: 1px solid #777;
     padding: 40px;
     border-radius: 16px;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 25px;
+    width: 25px;
 }
