@@ -5,7 +5,7 @@ import { useMainContext } from '../../../../contexts/MainContext'
 import Modal from '../../../Modal/Modal'
 import PostForm from '../../PostForm/PostForm'
 
-const PostDetail = ({ postId }) => {
+function PostDetail({ postId }) {
   const currentController = useRef(new AbortController()).current
   const navigate = useNavigate()
   const { deletePost } = useMainContext()

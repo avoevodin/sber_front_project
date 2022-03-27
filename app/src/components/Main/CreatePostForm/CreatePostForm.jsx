@@ -2,7 +2,7 @@ import { useMainContext } from '../../../contexts/MainContext'
 import PostForm from '../PostForm/PostForm'
 import SearchPostsForm from '../SearchPostsForm/SearchPostsForm'
 
-const CreatePostForm = () => {
+function CreatePostForm() {
   const { createPost } = useMainContext()
 
   const submitHandler = async (e) => {

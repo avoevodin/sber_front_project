@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useMainContext } from '../../../contexts/MainContext'
 
-const SearchPostsForm = () => {
+function SearchPostsForm() {
   const [searchInput, setSearchInput] = useState('')
   const { updatePosts, getSearchParams } = useMainContext()
   const [, setSearchParams] = useSearchParams()

@@ -4,7 +4,7 @@ import MainContextProvider from '../../../contexts/MainContext'
 import CommentsToggleBar from '../CommentsToggleBar/CommentsToggleBar'
 import PostDetail from './PostDetail/PostDetail'
 
-const PostDetailWrapper = () => {
+function PostDetailWrapper() {
   const { postId } = useParams()
   return (
     <MainContextProvider loadPosts={false}>
