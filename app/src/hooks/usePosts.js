@@ -12,6 +12,15 @@ const usePosts = (loadPosts) => {
   const [posts, setPosts] = useState([])
   const [searchParams] = useSearchParams()
 
+  // TODO is it optimal?
+  const getSearchParams = () => {
+    const parsedQuery = JSON.parse(searchParams.get('filter'))
+    if (parsedQuery && parsedQuery.title) {
+      return parsedQuery.title
+    }
+    return null
+  }
+
   const createPost = (inputs) => {
     const newPost = handleCollapseField(inputs)
     setPosts((prev) => [...prev, newPost])
@@ -34,9 +43,7 @@ const usePosts = (loadPosts) => {
   const updatePosts = (newPostsList) => setPosts(newPostsList)
 
   useEffect(() => {
-    const parsedQuery = JSON.parse(searchParams.get('filter'))
-    // TODO How to optimize
-    if (loadPosts && (!parsedQuery || !parsedQuery.title)) {
+    if (loadPosts && !getSearchParams()) {
       fetch('http://localhost:3000/api/v1/posts/')
         .then((response) => response.json())
         .then((dataFromServer) => setPosts(dataFromServer.map(
@@ -50,6 +57,7 @@ const usePosts = (loadPosts) => {
     createPost,
     deletePost,
     updatePosts,
+    getSearchParams,
   }
 }
 

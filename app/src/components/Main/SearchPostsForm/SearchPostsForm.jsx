@@ -4,15 +4,15 @@ import { useMainContext } from '../../../contexts/MainContext'
 
 function SearchPostsForm() {
   const [searchInput, setSearchInput] = useState('')
-  const { updatePosts } = useMainContext()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const { updatePosts, getSearchParams } = useMainContext()
+  const [, setSearchParams] = useSearchParams()
 
   const isMount = useRef(false)
 
   useEffect(() => {
-    const parsedQuery = JSON.parse(searchParams.get('filter'))
-    if (parsedQuery && parsedQuery.title) {
-      setSearchInput(parsedQuery.title)
+    const currentSearchParams = getSearchParams()
+    if (currentSearchParams) {
+      setSearchInput(currentSearchParams)
     }
   }, [])
 
