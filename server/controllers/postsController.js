@@ -3,7 +3,14 @@ const { db } = require('../DB')
 const { options } = require('../settings')
 
 const getPosts = (req, res) => {
-  const dataForClient = db.posts
+  const filter = req.query.filter && JSON.parse(req.query.filter)
+  let dataForClient = db.posts
+  
+  if (filter) {
+    const searchRegExp = new RegExp(filter.title, 'i')
+    dataForClient = dataForClient.filter((post) => searchRegExp.test(post.title))
+  }
+  
   res.json(dataForClient)
 }
 

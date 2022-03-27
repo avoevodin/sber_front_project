@@ -1,5 +1,6 @@
 import { useMainContext } from '../../../contexts/MainContext'
 import PostForm from '../PostForm/PostForm'
+import SearchPostsForm from '../SearchPostsForm/SearchPostsForm'
 
 function CreatePostForm() {
   const { createPost } = useMainContext()
@@ -27,7 +28,10 @@ function CreatePostForm() {
   }
 
   return (
-    <PostForm onSubmit={submitHandler} />
+    <>
+      <PostForm onSubmit={submitHandler} />
+      <SearchPostsForm />
+    </>
   )
 }
 

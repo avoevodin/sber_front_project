@@ -1,16 +1,15 @@
 import ReactDOM from 'react-dom'
 import { useEffect } from 'react'
 import { BsX } from 'react-icons/bs'
+import { AnimatePresence, motion } from 'framer-motion'
 import styles from './modal.module.css'
+import { modalInnerVariants, modalWrVariants } from './modalAnimation'
 
 function Modal({ children, state, ...rest }) {
   return ReactDOM.createPortal(
-    state
-    && (
-    <ModalInner {...rest}>
-        {children}
-    </ModalInner>
-    ),
+    <AnimatePresence>
+      {state && <ModalInner {...rest}>{children}</ModalInner>}
+    </AnimatePresence>,
     document.getElementById('modal-root'),
   )
 }
@@ -28,12 +27,18 @@ function ModalInner({ children, onClose }) {
   }, [])
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.inner}>
+    <motion.div
+      variants={modalWrVariants}
+      initial="start"
+      animate="show"
+      exit="end"
+      className={styles.wrapper}
+    >
+      <motion.div variants={modalInnerVariants} className={styles.inner}>
         <BsX className={styles.icon} />
         {children}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 

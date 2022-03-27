@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 function handleCollapseField(post, reverse = false) {
   return {
@@ -9,6 +10,7 @@ function handleCollapseField(post, reverse = false) {
 
 const usePosts = (loadPosts) => {
   const [posts, setPosts] = useState([])
+  const [searchParams] = useSearchParams()
 
   const createPost = (inputs) => {
     const newPost = handleCollapseField(inputs)
@@ -29,8 +31,12 @@ const usePosts = (loadPosts) => {
     return true
   }
 
+  const updatePosts = (newPostsList) => setPosts(newPostsList)
+
   useEffect(() => {
-    if (loadPosts) {
+    const parsedQuery = JSON.parse(searchParams.get('filter'))
+    // TODO How to optimize
+    if (loadPosts && (!parsedQuery || !parsedQuery.title)) {
       fetch('http://localhost:3000/api/v1/posts/')
         .then((response) => response.json())
         .then((dataFromServer) => setPosts(dataFromServer.map(
@@ -43,6 +49,7 @@ const usePosts = (loadPosts) => {
     posts,
     createPost,
     deletePost,
+    updatePosts,
   }
 }
 

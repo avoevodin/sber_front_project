@@ -5,12 +5,12 @@ const MainContext = createContext()
 
 function MainContextProvider({ children, loadPosts = true }) {
   const {
-    posts, createPost, deletePost, collapseComments,
+    posts, createPost, deletePost, collapseComments, updatePosts,
   } = usePosts(loadPosts)
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <MainContext.Provider value={{
-      posts, createPost, deletePost, collapseComments,
+      posts, createPost, deletePost, collapseComments, updatePosts,
     }}
     >
       {children}
