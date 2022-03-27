@@ -3,7 +3,7 @@ import usePosts from '../hooks/usePosts'
 
 const MainContext = createContext()
 
-function MainContextProvider({ children, loadPosts = true }) {
+const MainContextProvider = ({ children, loadPosts = true }) => {
   const {
     posts, createPost, deletePost, collapseComments, updatePosts, getSearchParams,
   } = usePosts(loadPosts)
