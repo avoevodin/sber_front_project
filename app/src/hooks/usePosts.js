@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 function handleCollapseField(post, reverse = false) {
@@ -11,6 +11,7 @@ function handleCollapseField(post, reverse = false) {
 const usePosts = (loadPosts) => {
   const [posts, setPosts] = useState([])
   const [searchParams] = useSearchParams()
+  const currentController = useRef(new AbortController()).current
 
   // TODO is it optimal?
   const getSearchParams = () => {
@@ -44,11 +45,17 @@ const usePosts = (loadPosts) => {
 
   useEffect(() => {
     if (loadPosts && !getSearchParams()) {
-      fetch('http://localhost:3000/api/v1/posts/')
+      fetch('http://localhost:3000/api/v1/posts/', {
+        signal: currentController.signal,
+      })
         .then((response) => response.json())
         .then((dataFromServer) => setPosts(dataFromServer.map(
           (post) => (handleCollapseField(post)),
         )))
+    }
+
+    return () => {
+      currentController.abort()
     }
   }, [])
 

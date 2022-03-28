@@ -1,3 +1,9 @@
+// Warning: Can't perform a React state update on an unmounted component.
+// This is a no-op, but it indicates a memory leak in your application.
+// To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+// >>>>>>>>>>>.
+// TODO this error appears after back navigation
+
 import { createContext, useContext, useMemo } from 'react'
 import withLoader from '../../../hocs/withLoader'
 import usePostDetail from '../hooks/usePostDetail'
@@ -12,11 +18,22 @@ function PostDetail({ postId }) {
   const { viewModal, openModal, closeModal } = usePostDetailModal()
   const {
     post, loading, submitHandler, deleteHandler,
-  } = usePostDetail(postId, closeModal)
+  } = usePostDetail(
+    postId,
+    closeModal,
+  )
 
-  const sharedValues = useMemo(() => ({
-    viewModal, openModal, closeModal, post, submitHandler, deleteHandler,
-  }), [post, viewModal])
+  const sharedValues = useMemo(
+    () => ({
+      viewModal,
+      openModal,
+      closeModal,
+      post,
+      submitHandler,
+      deleteHandler,
+    }),
+    [post, viewModal],
+  )
 
   return (
     <PostDetailContext.Provider value={sharedValues}>

@@ -4,6 +4,7 @@ function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="d-flex container-fluid">
+        {/* TODO how to ignore search params if they was set? */}
         <Link className="navbar-brand" to="/">
           Society
         </Link>
