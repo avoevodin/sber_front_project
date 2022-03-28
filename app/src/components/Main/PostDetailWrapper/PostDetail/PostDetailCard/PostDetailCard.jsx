@@ -1,13 +1,15 @@
+import { motion } from 'framer-motion'
 import { BsFillTrashFill, BsPencilSquare, BsArrowClockwise } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { usePostDetailContext } from '../PostDetail'
+import postDetailCardVariants from './postDetailCardAnimation'
 
 function PostDetailCard() {
   const navigate = useNavigate()
   const { post, openModal, deleteHandler } = usePostDetailContext()
 
   return (
-    <div className="card mb-3">
+    <motion.div variants={postDetailCardVariants} initial="start" animate="end" className="card mb-3">
       <div className="row g-0">
         <div className="col-md-4">
           <img
@@ -56,7 +58,7 @@ function PostDetailCard() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
