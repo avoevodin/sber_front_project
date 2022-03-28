@@ -26,16 +26,29 @@ function ModalInner({ children, onClose }) {
     return () => window.document.removeEventListener('keydown', escHandler)
   }, [])
 
+  const closeClickHandler = () => {
+    onClose()
+  }
+
+  const innerClickHandler = (e) => {
+    e.stopPropagation()
+  }
+
   return (
     <motion.div
       variants={modalWrVariants}
       initial="start"
       animate="show"
       exit="end"
+      onClick={closeClickHandler}
       className={styles.wrapper}
     >
-      <motion.div variants={modalInnerVariants} className={styles.inner}>
-        <BsX className={styles.icon} />
+      <motion.div
+        variants={modalInnerVariants}
+        className={styles.inner}
+        onClick={innerClickHandler}
+      >
+        <BsX role="button" className={styles.icon} onClick={closeClickHandler} />
         {children}
       </motion.div>
     </motion.div>
