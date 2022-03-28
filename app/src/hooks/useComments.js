@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const useComments = ({ postId }) => {
   const [comments, setComments] = useState([])
+  const currentController = useRef(new AbortController()).current
 
   const createComment = async (inputs) => {
     const newComment = {
@@ -29,11 +30,17 @@ const useComments = ({ postId }) => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/comments/post/${postId}`)
+    fetch(`http://localhost:3000/api/v1/comments/post/${postId}`, {
+      signal: currentController.signal,
+    })
       .then((response) => response.json())
       .then((dataFromServer) => {
         setComments(dataFromServer)
       })
+
+    return () => {
+      currentController.abort()
+    }
   }, [])
 
   return {
