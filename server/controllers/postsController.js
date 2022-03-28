@@ -22,7 +22,7 @@ const getCurrentPost = (req, res) => {
     return res.sendStatus(404)
   }
 
-  setTimeout(() => res.json(dataForClient), 1e1)
+  setTimeout(() => res.json(dataForClient), 3e3)
 }
 
 const createPost = (req, res) => {
