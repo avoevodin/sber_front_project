@@ -1,11 +1,23 @@
+import { motion } from 'framer-motion'
 import CommentsContextProvider from '../../../contexts/CommentsContext'
 import { useMainContext } from '../../../contexts/MainContext'
 import PostItem from './PostItem/PostItem'
 
+const postsListVariants = {
+  start: {
+    opacity: 0,
+  },
+  end: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+}
 function PostsList() {
   const { posts } = useMainContext()
   return (
-    <ul className="d-flex flex-column-reverse list-group">
+    <motion.ul variants={postsListVariants} initial="start" animate="end" className="d-flex flex-column-reverse list-group">
       {posts.map((post, index) => (
         <CommentsContextProvider key={post.id} postId={post.id}>
           <PostItem
@@ -20,7 +32,7 @@ function PostsList() {
           />
         </CommentsContextProvider>
       ))}
-    </ul>
+    </motion.ul>
   )
 }
 
