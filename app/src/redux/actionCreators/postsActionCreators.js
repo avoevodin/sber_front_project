@@ -7,18 +7,12 @@ const setPosts = (newPosts) => ({
   payload: newPosts,
 })
 
-export const setPostsQuery = ({
-  loadPosts, getSearchParams, handleCollapseField, signal,
-}) => async (dispatch) => {
-  if (loadPosts && !getSearchParams()) {
-    const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/`, {
-      signal,
-    })
-    const dataFromServer = await res.json()
-    dispatch(
-      setPosts(dataFromServer.map((post) => handleCollapseField(post))),
-    )
-  }
+export const setPostsQuery = ({ filter }) => async (dispatch) => {
+  const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${filter}`)
+  const dataFromServer = await res.json()
+  dispatch(
+    setPosts(dataFromServer),
+  )
 }
 
 const addPost = (newPost) => ({

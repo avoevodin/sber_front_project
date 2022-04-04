@@ -1,19 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { API_PORT } from '../../../settings'
-import { useMainContext } from '../../../contexts/MainContext'
+import { useDispatch } from 'react-redux'
+import { setFilter } from '../../../redux/actionCreators/filterActionCreators'
 
 function SearchPostsForm() {
   const [searchInput, setSearchInput] = useState('')
-  const { updatePosts, getSearchParams } = useMainContext()
-  const [, setSearchParams] = useSearchParams()
-
+  const [searchParams, setSearchParams] = useSearchParams()
+  const dispatch = useDispatch()
   const isMount = useRef(false)
 
   useEffect(() => {
-    const currentSearchParams = getSearchParams()
-    if (currentSearchParams) {
-      setSearchInput(currentSearchParams)
+    const parsedQuery = JSON.parse(searchParams.get('filter'))
+    if (parsedQuery && parsedQuery.title) {
+      setSearchInput(parsedQuery.title)
     }
   }, [])
 
@@ -25,10 +24,7 @@ function SearchPostsForm() {
       const prepareFilterForURL = encodeURIComponent(JSON.stringify(filter))
       const query = `?filter=${prepareFilterForURL}`
       setSearchParams(query)
-
-      fetch(`http://localhost:${API_PORT}/api/v1/posts/${query}`)
-        .then((response) => response.json())
-        .then((dataFromServer) => updatePosts(dataFromServer))
+      dispatch(setFilter(query))
     } else {
       isMount.current = true
     }

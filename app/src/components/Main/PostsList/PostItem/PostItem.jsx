@@ -5,13 +5,11 @@ import styles from './postItem.module.css'
 import CommentsToggleBar from '../../CommentsToggleBar/CommentsToggleBar'
 import { deletePostQuery } from '../../../../redux/actionCreators/postsActionCreators'
 
-function PostItem({
-  id, title, hashtag, image, text, date, commentsExpanded, index,
-}) {
+function PostItem({ post, index }) {
   const dispatch = useDispatch()
 
   const deleteHandler = () => {
-    dispatch(deletePostQuery(id))
+    dispatch(deletePostQuery(post.id))
   }
 
   return (
@@ -20,25 +18,27 @@ function PostItem({
         <div className="row g-0">
           <div className="col-md-4">
             <img
-              src={image}
+              src={post.image}
               className="img-fluid rounded-start"
               alt="Empty link"
             />
           </div>
           <div className="d-flex flex-column col-md-8">
             <div className="card-body">
-              <Link to={`/posts/${id}`} className="card-title">{title}</Link>
+              <Link to={`/posts/${post.id}`} className="card-title">
+                {post.title}
+              </Link>
               <hr />
-              <div className="card-text multiline-text">{text}</div>
+              <div className="card-text multiline-text">{post.text}</div>
               <p className="card-text">
-                <small className="text-muted">{hashtag}</small>
+                <small className="text-muted">{post.hashtag}</small>
               </p>
               <hr />
             </div>
             <div className="d-flex justify-content-end align-items-center mx-1">
               <div className="d-flex flex-column align-items-end mx-2">
                 <p className="card-text">
-                  <small className="fw-bolder text-muted">{date}</small>
+                  <small className="fw-bolder text-muted">{post.date}</small>
                 </p>
                 <button
                   onClick={deleteHandler}
@@ -52,7 +52,12 @@ function PostItem({
           </div>
         </div>
       </div>
-      <CommentsToggleBar key={id} postId={id} commentsExpanded={commentsExpanded} index={index} />
+      <CommentsToggleBar
+        key={post.id}
+        postId={post.id}
+        commentsExpanded={post.commentsExpanded}
+        index={index}
+      />
       <hr />
     </li>
   )
