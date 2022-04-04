@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { API_PORT } from '../../../settings'
 import { useMainContext } from '../../../contexts/MainContext'
 
 function SearchPostsForm() {
@@ -25,7 +26,7 @@ function SearchPostsForm() {
       const query = `?filter=${prepareFilterForURL}`
       setSearchParams(query)
 
-      fetch(`http://localhost:3000/api/v1/posts/${query}`)
+      fetch(`http://localhost:${API_PORT}/api/v1/posts/${query}`)
         .then((response) => response.json())
         .then((dataFromServer) => updatePosts(dataFromServer))
     } else {

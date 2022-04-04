@@ -1,3 +1,4 @@
+import { API_PORT } from '../../../settings'
 import { useCommentsContext } from '../../../contexts/CommentsContext'
 import CommentItem from '../CommentItem/CommentItem'
 import CreateCommentForm from '../CreateCommentForm/CreateCommentForm'
@@ -7,7 +8,7 @@ function CommentsList({ postId }) {
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    const res = await fetch('http://localhost:3000/api/v1/comments/', {
+    const res = await fetch(`http://localhost:${API_PORT}/api/v1/comments/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

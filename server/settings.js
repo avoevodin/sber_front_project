@@ -5,7 +5,7 @@ const options = {
   second: '2-digit',
 }
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3008
 
 module.exports = {
   options,

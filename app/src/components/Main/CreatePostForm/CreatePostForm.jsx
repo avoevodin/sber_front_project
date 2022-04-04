@@ -1,3 +1,4 @@
+import { API_PORT } from '../../../settings'
 import { useMainContext } from '../../../contexts/MainContext'
 import PostForm from '../PostForm/PostForm'
 import SearchPostsForm from '../SearchPostsForm/SearchPostsForm'
@@ -9,7 +10,7 @@ function CreatePostForm() {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
 
-    const res = await fetch('http://localhost:3000/api/v1/posts/', {
+    const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

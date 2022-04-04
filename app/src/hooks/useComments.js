@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { API_PORT } from '../settings'
 
 const useComments = ({ postId }) => {
   const [comments, setComments] = useState([])
@@ -15,7 +16,7 @@ const useComments = ({ postId }) => {
   }
 
   const deleteComment = async (id) => {
-    const res = await fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+    const res = await fetch(`http://localhost:${API_PORT}/api/v1/comments/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +31,7 @@ const useComments = ({ postId }) => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/comments/post/${postId}`, {
+    fetch(`http://localhost:${API_PORT}/api/v1/comments/post/${postId}`, {
       signal: currentController.signal,
     })
       .then((response) => response.json())

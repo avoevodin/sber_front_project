@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useCommentsContext } from '../../../contexts/CommentsContext'
 import Modal from '../../Modal/Modal'
 import CommentForm from '../CommentForm/CommentForm'
+import { API_PORT } from '../../../settings'
 
 function CommentItem({
   commentData,
@@ -26,7 +27,7 @@ function CommentItem({
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    const res = await fetch(`http://localhost:3000/api/v1/comments/${comment.id}`, {
+    const res = await fetch(`http://localhost:${API_PORT}/api/v1/comments/${comment.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

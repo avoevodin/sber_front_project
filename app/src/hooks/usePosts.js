@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { API_PORT } from '../settings'
 
 function handleCollapseField(post, reverse = false) {
   return {
@@ -28,7 +29,7 @@ const usePosts = (loadPosts) => {
   }
 
   const deletePost = async (id) => {
-    const res = await fetch(`http://localhost:3000/api/v1/posts/${id}`, {
+    const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ const usePosts = (loadPosts) => {
 
   useEffect(() => {
     if (loadPosts && !getSearchParams()) {
-      fetch('http://localhost:3000/api/v1/posts/', {
+      fetch(`http://localhost:${API_PORT}/api/v1/posts/`, {
         signal: currentController.signal,
       })
         .then((response) => response.json())

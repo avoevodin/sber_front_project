@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { API_PORT } from '../../../../settings'
 import { useMainContext } from '../../../../contexts/MainContext'
 
 const usePostDetail = (postId, closeModal) => {
@@ -11,7 +12,7 @@ const usePostDetail = (postId, closeModal) => {
 
   useLayoutEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:3000/api/v1/posts/${postId}`, {
+    fetch(`http://localhost:${API_PORT}/api/v1/posts/${postId}`, {
       signal: currentController.signal,
     })
       .then((response) => response.json())
@@ -31,7 +32,7 @@ const usePostDetail = (postId, closeModal) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
 
-    const res = await fetch(`http://localhost:3000/api/v1/posts/${postId}`, {
+    const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${postId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
