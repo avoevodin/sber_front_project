@@ -2,8 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const { postsRouter } = require('./routes/postsRouter')
 const { commentsRouter } = require('./routes/commentsRouter')
-
-const PORT = process.env.PORT || 3000
+const { PORT } = require('./settings')
 
 const app = express()
 app.use(cors())
