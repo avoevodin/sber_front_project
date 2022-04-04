@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import CommentsContextProvider from '../../../contexts/CommentsContext'
-import { useMainContext } from '../../../contexts/MainContext'
+import usePosts from '../../../hooks/usePosts'
 import PostItem from './PostItem/PostItem'
 
 const postsListVariants = {
@@ -15,7 +15,7 @@ const postsListVariants = {
   },
 }
 function PostsList() {
-  const { posts } = useMainContext()
+  const { posts } = usePosts(true)
   return (
     <motion.ul variants={postsListVariants} initial="start" animate="end" className="d-flex flex-column-reverse list-group">
       {posts.map((post, index) => (

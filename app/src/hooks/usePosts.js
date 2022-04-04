@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { API_PORT } from '../settings'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPostsQuery } from '../redux/actionCreators/postsActionCreators'
 
 function handleCollapseField(post, reverse = false) {
   return {
@@ -10,7 +11,8 @@ function handleCollapseField(post, reverse = false) {
 }
 
 const usePosts = (loadPosts) => {
-  const [posts, setPosts] = useState([])
+  const dispatch = useDispatch()
+  const posts = useSelector((store) => store.posts)
   const [searchParams] = useSearchParams()
   const currentController = useRef(new AbortController()).current
 
@@ -23,37 +25,12 @@ const usePosts = (loadPosts) => {
     return null
   }
 
-  const createPost = (inputs) => {
-    const newPost = handleCollapseField(inputs)
-    setPosts((prev) => [...prev, newPost])
-  }
-
-  const deletePost = async (id) => {
-    const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-
-    if (res.status !== 200) return false
-
-    setPosts((prev) => prev.filter((post) => post.id !== id))
-    return true
-  }
-
-  const updatePosts = (newPostsList) => setPosts(newPostsList)
-
   useEffect(() => {
-    if (loadPosts && !getSearchParams()) {
-      fetch(`http://localhost:${API_PORT}/api/v1/posts/`, {
-        signal: currentController.signal,
-      })
-        .then((response) => response.json())
-        .then((dataFromServer) => setPosts(dataFromServer.map(
-          (post) => (handleCollapseField(post)),
-        )))
-    }
+    dispatch(
+      setPostsQuery({
+        loadPosts, getSearchParams, handleCollapseField, signal: currentController.signal,
+      }),
+    )
 
     return () => {
       currentController.abort()
@@ -62,9 +39,6 @@ const usePosts = (loadPosts) => {
 
   return {
     posts,
-    createPost,
-    deletePost,
-    updatePosts,
     getSearchParams,
   }
 }

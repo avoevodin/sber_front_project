@@ -1,16 +1,17 @@
 import { BsFillTrashFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import styles from './postItem.module.css'
-import { useMainContext } from '../../../../contexts/MainContext'
 import CommentsToggleBar from '../../CommentsToggleBar/CommentsToggleBar'
+import { deletePostQuery } from '../../../../redux/actionCreators/postsActionCreators'
 
 function PostItem({
   id, title, hashtag, image, text, date, commentsExpanded, index,
 }) {
-  const { deletePost } = useMainContext()
+  const dispatch = useDispatch()
 
   const deleteHandler = () => {
-    deletePost(id)
+    dispatch(deletePostQuery(id))
   }
 
   return (
