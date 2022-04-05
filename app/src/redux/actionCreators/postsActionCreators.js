@@ -22,7 +22,7 @@ const addPost = (newPost) => ({
   payload: newPost,
 })
 
-export const addPostQuery = (formData, e) => async (dispatch) => {
+export const addPostQuery = (formData, e, changePosts = true) => async (dispatch) => {
   const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/`, {
     method: 'POST',
     headers: {
@@ -32,8 +32,10 @@ export const addPostQuery = (formData, e) => async (dispatch) => {
   })
 
   if (res.status === 201) {
-    const postFromServer = await res.json()
-    dispatch(addPost(postFromServer))
+    if (changePosts) {
+      const postFromServer = await res.json()
+      dispatch(addPost(postFromServer))
+    }
     e.target.reset()
   } else {
     alert('Wrong data')
