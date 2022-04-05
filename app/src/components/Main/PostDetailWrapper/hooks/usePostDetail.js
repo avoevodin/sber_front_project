@@ -1,23 +1,23 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { API_PORT } from '../../../../settings'
-import { useMainContext } from '../../../../contexts/MainContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { deletePostQuery, getPostQuery, updatePostQuery } from '../../../../redux/actionCreators/postsActionCreators'
 
 const usePostDetail = (postId, closeModal) => {
-  const { deletePost } = useMainContext()
-  const [post, setPost] = useState({})
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const currentController = useRef(new AbortController()).current
+  const dispatch = useDispatch()
+
+  const post = useSelector((store) => store.posts.find((el) => el.id === postId)) || {}
+
   const navigate = useNavigate()
 
+  const navigateBack = () => {
+    navigate(-1)
+  }
+
   useLayoutEffect(() => {
-    setLoading(true)
-    fetch(`http://localhost:${API_PORT}/api/v1/posts/${postId}`, {
-      signal: currentController.signal,
-    })
-      .then((response) => response.json())
-      .then((dataFromServer) => setPost(dataFromServer))
-      .finally(() => setLoading(false))
+    dispatch(getPostQuery(postId, currentController.signal, setLoading))
 
     return () => {
       currentController.abort()
@@ -25,32 +25,15 @@ const usePostDetail = (postId, closeModal) => {
   }, [])
 
   const deleteHandler = async () => {
-    if (await deletePost(postId)) navigate(-1)
+    dispatch(deletePostQuery(postId, navigateBack))
   }
 
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-
-    const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${postId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-
-    if (res.status === 200) {
-      const updatedPost = await res.json()
-
-      setPost(updatedPost)
-      e.target.reset()
-      closeModal()
-    } else {
-      // eslint-disable-next-line no-alert
-      alert('Wrong data')
-    }
+    dispatch(updatePostQuery(postId, formData, closeModal, e))
   }
+
   return {
     post,
     loading,

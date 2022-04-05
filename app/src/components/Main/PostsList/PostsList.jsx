@@ -30,7 +30,7 @@ function PostsList() {
     // Is there another solution?
     if (!(parsedQuery && parsedQuery.title) || filter) {
       dispatch(
-        setPostsQuery({ filter }),
+        setPostsQuery(filter),
       )
     }
   }, [filter])

@@ -1,4 +1,6 @@
-import { ADD_POST, DELETE_POST, SET_POSTS } from '../types/postsTypes'
+import {
+  ADD_POST, DELETE_POST, SET_POSTS, UPDATE_POST,
+} from '../types/postsTypes'
 
 /* eslint-disable default-param-last */
 const postsReducer = (store = [], action) => {
@@ -9,6 +11,13 @@ const postsReducer = (store = [], action) => {
       return [...store, action.payload]
     case DELETE_POST:
       return store.filter((post) => post.id !== action.payload)
+    case UPDATE_POST:
+      return store.map((post) => {
+        if (post.id === action.payload.id) {
+          return action.payload
+        }
+        return post
+      })
 
     default:
       return store

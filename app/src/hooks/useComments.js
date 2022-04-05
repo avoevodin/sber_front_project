@@ -5,7 +5,7 @@ const useComments = ({ postId }) => {
   const [comments, setComments] = useState([])
   const currentController = useRef(new AbortController()).current
 
-  const createComment = async (inputs) => {
+  const createComment = (inputs) => {
     const newComment = {
       id: inputs.id,
       postId: inputs.postId,
