@@ -36,8 +36,15 @@ const db = {
     },
   ],
   comments: [],
-  users: [],
-  sesions: [],
+  users: [
+    {
+      id: '1',
+      username: 'first',
+      email: 'first@ex.com',
+      password: '1234',
+      avatar: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg',
+    },
+  ],
 }
 
 module.exports = {
