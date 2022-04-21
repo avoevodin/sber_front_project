@@ -36,6 +36,8 @@ const db = {
     },
   ],
   comments: [],
+  users: [],
+  sesions: [],
 }
 
 module.exports = {
