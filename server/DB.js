@@ -4,6 +4,7 @@ const db = {
   posts: [
     {
       id: '1',
+      authorId: '1',
       title: 'Dooh!',
       text: 'Why you little!',
       hashtag: '#doh',
@@ -12,6 +13,7 @@ const db = {
     },
     {
       id: '2',
+      authorId: '1',
       title: 'Eat My Shorts!',
       text: 'I\'m Bart Simpson,\nWho the Hell are You?',
       hashtag: '#caramba',
@@ -20,6 +22,7 @@ const db = {
     },
     {
       id: '3',
+      authorId: '1',
       title: 'Quit it, Bart!',
       text: 'If anyone wants me,\nI\'ll be in my room.',
       hashtag: '#BAAAAAART',
@@ -28,6 +31,7 @@ const db = {
     },
     {
       id: '4',
+      authorId: '1',
       title: 'Oh, Homie.',
       text: 'You have no idea what it\'s like,\nbeing married to you.',
       hashtag: '#mmmmm',
@@ -36,6 +40,15 @@ const db = {
     },
   ],
   comments: [],
+  users: [
+    {
+      id: '1',
+      username: 'first',
+      email: 'first@ex.com',
+      password: '1234',
+      avatar: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg',
+    },
+  ],
 }
 
 module.exports = {

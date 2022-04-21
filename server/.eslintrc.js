@@ -14,6 +14,6 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     'no-console': 0,
-    'max-classes-per-file': 0,
+    'import/no-cycle': 0,
   },
-}
+};
