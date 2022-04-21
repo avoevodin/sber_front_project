@@ -1,36 +1,26 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 const SignIn = () => (
-  <div className="form-signin">
-    <form>
-      <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-      <div className="form-floating">
+  <div className="d-flex justify-content-center">
+    <form className="d-flex flex-column">
+      <div className="mb-3">
         <input
           type="email"
           className="form-control"
-          id="floatingInput"
-          placeholder="name@example.com"
+          aria-describedby="emailHelp"
+          placeholder="Email or username"
         />
-        <label htmlFor="floatingInput">Email address</label>
+        <div id="emailHelp" className="form-text">
+          We will never share your email with anyone else.
+        </div>
       </div>
-      <div className="form-floating">
+      <div className="mb-3">
         <input
           type="password"
           className="form-control"
-          id="floatingPassword"
-          placeholder="Password"
+          placeholder="password"
         />
-        <label htmlFor="floatingPassword">Password</label>
       </div>
-
-      <div className="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" />
-          {' '}
-          Remember me
-        </label>
-      </div>
-      <button className="w-100 btn btn-lg btn-primary" type="submit">
-        Sign in
+      <button type="submit" className="btn btn-primary">
+        Log in
       </button>
     </form>
   </div>
