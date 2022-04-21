@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setFilter } from '../../../redux/actionCreators/filterActionCreators'
 
-function SearchPostsForm() {
+const SearchPostsForm = () => {
   const [searchInput, setSearchInput] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useDispatch()

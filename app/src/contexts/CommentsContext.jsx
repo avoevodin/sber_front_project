@@ -3,7 +3,7 @@ import useComments from '../hooks/useComments'
 
 const CommentsContext = createContext()
 
-function CommentsContextProvider({ children, postId }) {
+const CommentsContextProvider = ({ children, postId }) => {
   const {
     comments, createComment, deleteCommentsByPost, deleteComment,
   } = useComments({ postId })

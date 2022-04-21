@@ -2,7 +2,7 @@ import { API_PORT } from '../../../settings'
 import { useCommentsContext } from '../../../contexts/CommentsContext'
 import CommentForm from '../CommentForm/CommentForm'
 
-function CreateCommentForm() {
+const CreateCommentForm = () => {
   const { createComment, postId } = useCommentsContext()
 
   const submitHandler = async (e) => {

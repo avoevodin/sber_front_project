@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import CommentsList from '../CommentsList/CommentsList'
 
-function CommentsToggleBar({
+const CommentsToggleBar = ({
   commentsExpanded = false, index = -1, postId = 0,
-}) {
+}) => {
   const [commentsToggler, setCommentsToggler] = useState(commentsExpanded)
 
   const collapseCommentsHandler = () => {

@@ -3,7 +3,7 @@ import { useCommentsContext } from '../../../contexts/CommentsContext'
 import CommentItem from '../CommentItem/CommentItem'
 import CreateCommentForm from '../CreateCommentForm/CreateCommentForm'
 
-function CommentsList({ postId }) {
+const CommentsList = ({ postId }) => {
   const { comments, createComment } = useCommentsContext()
   const submitHandler = async (e) => {
     e.preventDefault()
