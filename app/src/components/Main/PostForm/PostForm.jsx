@@ -1,13 +1,13 @@
 import { useRef, useEffect, useState } from 'react'
 
-function PostForm({
+const PostForm = ({
   onSubmit, inputs = {
     title: '',
     image: '',
     hashtag: '',
     text: '',
   },
-}) {
+}) => {
   const formRef = useRef(null)
   const [buttonText, setButtonText] = useState('Add post')
 

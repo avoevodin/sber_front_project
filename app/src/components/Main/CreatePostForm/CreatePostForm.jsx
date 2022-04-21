@@ -4,7 +4,7 @@ import { addPostQuery } from '../../../redux/actionCreators/postsActionCreators'
 import PostForm from '../PostForm/PostForm'
 import SearchPostsForm from '../SearchPostsForm/SearchPostsForm'
 
-function CreatePostForm() {
+const CreatePostForm = () => {
   const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
 

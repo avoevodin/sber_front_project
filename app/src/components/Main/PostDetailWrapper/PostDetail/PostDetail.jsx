@@ -14,7 +14,7 @@ import PostDetailModal from './PostDetailModal/PostDetailModal'
 const PostDetailContext = createContext()
 const PostDetailCardWithLoader = withLoader(PostDetailCard)
 
-function PostDetail({ postId }) {
+const PostDetail = ({ postId }) => {
   const { viewModal, openModal, closeModal } = usePostDetailModal()
   const {
     post, loading, submitHandler, deleteHandler,

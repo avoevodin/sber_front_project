@@ -17,7 +17,7 @@ const postsListVariants = {
     },
   },
 }
-function PostsList() {
+const PostsList = () => {
   const dispatch = useDispatch()
   const posts = useSelector((store) => store.posts)
   const filter = useSelector((store) => store.filter)

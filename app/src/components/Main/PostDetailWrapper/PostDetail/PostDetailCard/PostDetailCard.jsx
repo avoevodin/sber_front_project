@@ -6,7 +6,7 @@ import CommentsToggleBar from '../../../CommentsToggleBar/CommentsToggleBar'
 import { usePostDetailContext } from '../PostDetail'
 import postDetailCardVariants from './postDetailCardAnimation'
 
-function PostDetailCard() {
+const PostDetailCard = () => {
   const navigate = useNavigate()
   const { post, openModal, deleteHandler } = usePostDetailContext()
 

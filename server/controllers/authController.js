@@ -44,7 +44,8 @@ const signUp = (req, res) => {
 
 const signIn = (req, res) => {
     const userData = req.body
-    const user = users.find((user) => user.username === userData.username)
+    const user = users.find((user) => 
+        user.username === userData.username || user.email === userData.username)
 
     if (!user) return res.status(404).send({message: "User not found!"})
     

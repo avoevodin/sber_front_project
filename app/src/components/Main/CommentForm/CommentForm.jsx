@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 
-function CommentForm({ onSubmit, text = '' }) {
+const CommentForm = ({ onSubmit, text = '' }) => {
   const formRef = useRef(null)
   const [buttonText, setButtonText] = useState('Add comment')
   useEffect(() => {

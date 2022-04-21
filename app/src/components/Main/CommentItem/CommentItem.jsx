@@ -6,9 +6,9 @@ import Modal from '../../Modal/Modal'
 import CommentForm from '../CommentForm/CommentForm'
 import { API_PORT } from '../../../settings'
 
-function CommentItem({
+const CommentItem = ({
   commentData,
-}) {
+}) => {
   const { deleteComment } = useCommentsContext()
   const [comment, setComment] = useState(commentData)
   const [viewModal, setViewModal] = useState(false)

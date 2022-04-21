@@ -5,7 +5,7 @@ import styles from './postItem.module.css'
 import CommentsToggleBar from '../../CommentsToggleBar/CommentsToggleBar'
 import { deletePostQuery } from '../../../../redux/actionCreators/postsActionCreators'
 
-function PostItem({ post, index }) {
+const PostItem = ({ post, index }) => {
   const dispatch = useDispatch()
 
   const deleteHandler = () => {

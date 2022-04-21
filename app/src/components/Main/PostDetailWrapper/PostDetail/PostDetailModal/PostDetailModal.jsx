@@ -2,7 +2,7 @@ import Modal from '../../../../Modal/Modal'
 import PostForm from '../../../PostForm/PostForm'
 import { usePostDetailContext } from '../PostDetail'
 
-function PostDetailModal() {
+const PostDetailModal = () => {
   const {
     viewModal, closeModal, submitHandler, post,
   } = usePostDetailContext()
