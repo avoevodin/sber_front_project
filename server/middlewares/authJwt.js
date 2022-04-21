@@ -4,7 +4,7 @@ const { db } = require('../DB')
 const users = db.users
 
 const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization'].split(' ')[1]
+    const token = req.headers['authorization']?.split(' ')[1]
 
     if (!token) {
         return res.status(403).send({
@@ -14,8 +14,21 @@ const verifyToken = (req, res, next) => {
     
     jwt.verify(token, authConfig.secret, (err, decoded) => {
         if (err) {
-            return res.status(401).send({
-                message: "Unauthorized!",
+            let resData
+            if (err.expiredAt) {
+                resData = {
+                    status: 403,
+                    message: "Token has expired!"
+                }
+            } else {
+                resData = {
+                    status: 401,
+                    message: "Unauthorized!"
+                }
+            }
+
+            return res.status(resData.status).send({
+                message: resData.message,
             })
         }
         req.userId = decoded.id
@@ -23,3 +36,5 @@ const verifyToken = (req, res, next) => {
     })
     
 }
+
+module.exports = verifyToken
