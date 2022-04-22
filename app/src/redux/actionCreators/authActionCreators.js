@@ -3,8 +3,8 @@ import axiosInstance from '../../config/axios'
 import { USER_LS_KEY } from '../../settings'
 import { LOGIN_SUCCESS, REGISTER_SUCCESS } from '../types/authTypes'
 
-const setTokensToLS = (tokensData) => {
-  localStorage.setItem(USER_LS_KEY, tokensData)
+const setTokensToLS = (userData) => {
+  localStorage.setItem(USER_LS_KEY, userData)
 }
 
 const signUp = (userData) => ({
@@ -12,13 +12,13 @@ const signUp = (userData) => ({
   payload: userData,
 })
 
-export const signUpQuery = (formData, e) => async (dispatch) => {
+export const signUpQuery = (formData, e, cb) => async (dispatch) => {
   await axiosInstance.post('auth/signup', formData)
     .then((res) => {
       if (res.status === 200) {
         const userDataFromServer = res.data
-        setTokensToLS(JSON.stringify(userDataFromServer.tokensData))
-        dispatch(signUp(userDataFromServer.userData))
+        setTokensToLS(JSON.stringify(userDataFromServer))
+        dispatch(signUp(userDataFromServer))
         e.target.reset()
       }
     })
@@ -26,6 +26,8 @@ export const signUpQuery = (formData, e) => async (dispatch) => {
       const message = err.response?.data?.message
       if (message) alert(message)
     })
+
+  if (typeof cb === 'function') cb()
 }
 
 const signIn = (userData) => ({
@@ -33,13 +35,13 @@ const signIn = (userData) => ({
   payload: userData,
 })
 
-export const signInQuery = (formData, e) => async (dispatch) => {
+export const signInQuery = (formData, e, cb) => async (dispatch) => {
   await axiosInstance.post('auth/signin', formData)
     .then((res) => {
       if (res.status === 200) {
         const userDataFromServer = res.data
-        setTokensToLS(JSON.stringify(userDataFromServer.tokensData))
-        dispatch(signIn(userDataFromServer.userData))
+        setTokensToLS(JSON.stringify(userDataFromServer))
+        dispatch(signIn(userDataFromServer))
         e.target.reset()
       }
     })
@@ -47,4 +49,6 @@ export const signInQuery = (formData, e) => async (dispatch) => {
       const message = err.response?.data?.message
       if (message) alert(message)
     })
+
+  if (typeof cb === 'function') cb()
 }

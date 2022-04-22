@@ -1,13 +1,18 @@
 import { useDispatch } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { signUpQuery } from '../../../redux/actionCreators/authActionCreators'
 
 const SignUp = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const from = location.state?.from?.pathname || '/'
 
   const submitHandler = (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    dispatch(signUpQuery(formData, e))
+    dispatch(signUpQuery(formData, e, () => navigate(from, { replace: true })))
   }
 
   return (
