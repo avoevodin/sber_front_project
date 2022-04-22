@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
-import { API_PORT } from '../../settings'
+import { authHeader } from '../../config/auth'
+import axiosInstance from '../../config/axios'
 import {
   ADD_POST, DELETE_POST, SET_POSTS, UPDATE_POST,
 } from '../types/postsTypes'
@@ -10,8 +11,12 @@ const setPosts = (newPosts) => ({
 })
 
 export const setPostsQuery = (filter) => async (dispatch) => {
-  const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${filter}`)
-  const dataFromServer = await res.json()
+  const res = await axiosInstance.get(`posts/${filter}`, {
+    headers: {
+      ...authHeader(),
+    },
+  })
+  const dataFromServer = res.data
   dispatch(
     setPosts(dataFromServer),
   )
@@ -23,17 +28,16 @@ const addPost = (newPost) => ({
 })
 
 export const addPostQuery = (formData, e, changePosts = true) => async (dispatch) => {
-  const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/`, {
-    method: 'POST',
+  console.log('hi', formData, 'changePosts: ', changePosts)
+  const res = await axiosInstance.post('posts/', formData, {
     headers: {
-      'Content-Type': 'application/json',
+      ...authHeader(),
     },
-    body: JSON.stringify(formData),
   })
-
+  console.log(res.status)
   if (res.status === 201) {
     if (changePosts) {
-      const postFromServer = await res.json()
+      const postFromServer = res.data
       dispatch(addPost(postFromServer))
     }
     e.target.reset()
@@ -48,10 +52,9 @@ const deletePost = (id) => ({
 })
 
 export const deletePostQuery = (id, navigateBack = undefined) => async (dispatch) => {
-  const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${id}`, {
-    method: 'DELETE',
+  const res = await axiosInstance.delete(`posts/${id}`, {
     headers: {
-      'Content-Type': 'application/json',
+      ...authHeader(),
     },
   })
 
@@ -63,11 +66,14 @@ export const deletePostQuery = (id, navigateBack = undefined) => async (dispatch
 }
 
 export const getPostQuery = (id, signal, setLoading) => async (dispatch) => {
-  const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${id}`, {
+  const res = await axiosInstance(`posts/${id}`, {
+    headers: {
+      ...authHeader(),
+    },
     signal,
   })
   if (res.status === 200) {
-    const dataFromServer = await res.json()
+    const dataFromServer = res.data
     dispatch(setPosts([dataFromServer]))
   }
   setLoading(false)
@@ -79,16 +85,14 @@ const updatePost = (updatedPost) => ({
 })
 
 export const updatePostQuery = (id, formData, closeModal, e) => async (dispatch) => {
-  const res = await fetch(`http://localhost:${API_PORT}/api/v1/posts/${id}`, {
-    method: 'PATCH',
+  const res = await axiosInstance.patch(`posts/${id}`, formData, {
     headers: {
-      'Content-Type': 'application/json',
+      ...authHeader(),
     },
-    body: JSON.stringify(formData),
   })
 
   if (res.status === 200) {
-    const updatedPost = await res.json()
+    const updatedPost = res.data
 
     dispatch(updatePost(updatedPost))
     e.target.reset()

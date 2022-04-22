@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 const { options } = require('./settings')
 
 const db = {
@@ -45,7 +46,7 @@ const db = {
       id: '1',
       username: 'first',
       email: 'first@ex.com',
-      password: '1234',
+      password: bcrypt.hashSync('1234', 8),
       avatar: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg',
     },
   ],

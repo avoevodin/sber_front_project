@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { API_PORT } from '../settings'
+import { authHeader } from '../config/auth'
+import axiosInstance from '../config/axios'
 
 const useComments = ({ postId }) => {
   const [comments, setComments] = useState([])
@@ -16,27 +17,28 @@ const useComments = ({ postId }) => {
   }
 
   const deleteComment = async (id) => {
-    const res = await fetch(`http://localhost:${API_PORT}/api/v1/comments/${id}`, {
-      method: 'DELETE',
+    const res = await axiosInstance.delete(`comments/${id}`, {
       headers: {
-        'Content-Type': 'application/json',
+        ...authHeader(),
       },
     })
 
     if (res.status !== 200) return false
 
-    const commentsFromServer = await res.json()
+    const commentsFromServer = res.data
     setComments(commentsFromServer)
     return true
   }
 
   useEffect(() => {
-    fetch(`http://localhost:${API_PORT}/api/v1/comments/post/${postId}`, {
+    axiosInstance.get(`comments/post/${postId}`, {
+      headers: {
+        ...authHeader(),
+      },
       signal: currentController.signal,
     })
-      .then((response) => response.json())
-      .then((dataFromServer) => {
-        setComments(dataFromServer)
+      .then((response) => {
+        setComments(response.data)
       })
 
     return () => {

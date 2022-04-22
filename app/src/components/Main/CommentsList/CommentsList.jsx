@@ -1,23 +1,26 @@
-import { API_PORT } from '../../../settings'
 import { useCommentsContext } from '../../../contexts/CommentsContext'
 import CommentItem from '../CommentItem/CommentItem'
 import CreateCommentForm from '../CreateCommentForm/CreateCommentForm'
+import axiosInstance from '../../../config/axios'
+import { authHeader } from '../../../config/auth'
 
 const CommentsList = ({ postId }) => {
   const { comments, createComment } = useCommentsContext()
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    const res = await fetch(`http://localhost:${API_PORT}/api/v1/comments/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    const res = await axiosInstance.post(
+      'comments/',
+      {
         ...formData,
         postId,
-      }),
-    })
+      },
+      {
+        headers: {
+          ...authHeader(),
+        },
+      },
+    )
 
     if (res.status === 201) {
       const commentFromServer = await res.json()
