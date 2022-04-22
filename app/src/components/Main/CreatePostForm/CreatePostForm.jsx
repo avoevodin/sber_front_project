@@ -10,16 +10,15 @@ const CreatePostForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault()
-
     const formData = Object.fromEntries(new FormData(e.target).entries())
     const parsedQuery = JSON.parse(searchParams.get('filter'))
-
+    let changePosts = true
     // TODO How to share this logic between client and server. Is it possible?
     if (parsedQuery && parsedQuery.title) {
       const searchRegExp = new RegExp(parsedQuery.title, 'i')
-      const changePosts = (searchRegExp.test(formData.title))
-      dispatch(addPostQuery(formData, e, changePosts))
+      changePosts = (searchRegExp.test(formData.title))
     }
+    dispatch(addPostQuery(formData, e, changePosts))
   }
 
   return (

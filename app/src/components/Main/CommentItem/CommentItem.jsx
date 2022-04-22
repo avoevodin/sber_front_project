@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useCommentsContext } from '../../../contexts/CommentsContext'
 import Modal from '../../Modal/Modal'
 import CommentForm from '../CommentForm/CommentForm'
-import { API_PORT } from '../../../settings'
+import { authHeader } from '../../../config/auth'
+import axiosInstance from '../../../config/axios'
 
 const CommentItem = ({
   commentData,
@@ -27,16 +28,14 @@ const CommentItem = ({
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    const res = await fetch(`http://localhost:${API_PORT}/api/v1/comments/${comment.id}`, {
-      method: 'PATCH',
+    const res = await axiosInstance.patch(`comments/${comment.id}`, formData, {
       headers: {
-        'Content-Type': 'application/json',
+        ...authHeader(),
       },
-      body: JSON.stringify(formData),
     })
 
     if (res.status === 200) {
-      const updatedComment = await res.json()
+      const updatedComment = res.data
 
       setComment(updatedComment)
       e.target.reset()
