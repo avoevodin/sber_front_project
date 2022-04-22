@@ -4,7 +4,6 @@ import CreateCommentForm from '../CreateCommentForm/CreateCommentForm'
 
 const CommentsList = ({ postId }) => {
   const { comments } = useCommentsContext()
-
   return (
     <>
       {comments && comments.length ? (

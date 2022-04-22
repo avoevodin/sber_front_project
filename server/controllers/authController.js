@@ -28,6 +28,7 @@ const createAccessAndRefreshTokens = (userData) => {
 
 const getUserDataForClient = (userId, userData) => ({
   userData: {
+    userId,
     username: userData.username,
     avatar: userData.avatar,
   },

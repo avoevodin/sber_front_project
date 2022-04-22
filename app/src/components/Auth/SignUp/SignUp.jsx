@@ -1,7 +1,13 @@
+import { useDispatch } from 'react-redux'
+import { signUpQuery } from '../../../redux/actionCreators/authActionCreators'
+
 const SignUp = () => {
-  console.log('hi')
+  const dispatch = useDispatch()
+
   const submitHandler = (e) => {
     e.preventDefault()
+    const formData = Object.fromEntries(new FormData(e.target).entries())
+    dispatch(signUpQuery(formData, e))
   }
 
   return (

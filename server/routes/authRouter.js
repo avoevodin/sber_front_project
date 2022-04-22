@@ -5,14 +5,14 @@ const verifySignUp = require('../middlewares/verifySignUp')
 const authRouter = express.Router()
 
 authRouter.route('/signup')
-    .post(verifySignUp.checkDubplicateUsernameOrEmail, signUp)
+  .post(verifySignUp.checkDubplicateUsernameOrEmail, signUp)
 
 authRouter.route('/signin')
-    .post(signIn)
+  .post(signIn)
 
 authRouter.route('/token')
-    .post(updateToken)
+  .post(updateToken)
 
 module.exports = {
-    authRouter
+  authRouter,
 }
