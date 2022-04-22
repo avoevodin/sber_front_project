@@ -19,9 +19,11 @@ const SignIn = () => (
           placeholder="password"
         />
       </div>
-      <button type="submit" className="btn btn-primary">
-        Log in
-      </button>
+      <div className="d-flex justify-content-center">
+        <button type="submit" className="btn btn-primary col-8">
+          Log in
+        </button>
+      </div>
     </form>
   </div>
 )
