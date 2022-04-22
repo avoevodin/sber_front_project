@@ -26,6 +26,17 @@ const createAccessAndRefreshTokens = (userData) => {
   return tokensData
 }
 
+const getUserDataForClient = (userId, userData) => ({
+  userData: {
+    userId,
+    username: userData.username,
+    avatar: userData.avatar,
+  },
+  tokensData: createAccessAndRefreshTokens({
+    id: userId,
+  }),
+})
+
 const signUp = (req, res) => {
   const postData = req.body
   const userId = uuidv4()
@@ -36,11 +47,8 @@ const signUp = (req, res) => {
     avatar: postData.avatar,
     password: bcrypt.hashSync(postData.password, 8),
   })
-  const tokensData = createAccessAndRefreshTokens({
-    id: userId,
-  })
 
-  res.status(200).send(tokensData)
+  res.status(200).send(getUserDataForClient(userId, postData))
 }
 
 const signIn = (req, res) => {
@@ -62,11 +70,7 @@ const signIn = (req, res) => {
     })
   }
 
-  const tokensData = createAccessAndRefreshTokens({
-    id: user.id,
-  })
-
-  return res.status(200).send(tokensData)
+  return res.status(200).send(getUserDataForClient(user.id, userData))
 }
 
 const updateToken = (req, res) => {

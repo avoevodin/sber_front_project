@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer'
 import PostDetailWrapper from './components/Main/PostDetailWrapper/PostDetailWrapper'
 import Home from './components/Home/Home'
 import SignIn from './components/Auth/SignIn/SignIn'
+import SignUp from './components/Auth/SignUp/SignUp'
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const App = () => (
         <Route path="/" element={<Home />} />
         <Route path="/auth/">
           <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
         </Route>
         <Route path="/posts" element={<Main />} />
         <Route path="/posts/:postId" element={<PostDetailWrapper />} />
