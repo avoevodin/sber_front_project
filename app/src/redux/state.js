@@ -1,12 +1,12 @@
 const user = JSON.parse(localStorage.getItem('user'))
-const authData = user
+const initAuthData = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null }
 
 const initState = {
   posts: [],
   filter: '',
-  auth: authData,
+  auth: initAuthData,
 }
 
 export default initState

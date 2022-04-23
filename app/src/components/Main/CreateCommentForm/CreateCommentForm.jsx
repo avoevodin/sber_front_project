@@ -1,7 +1,6 @@
 import { useCommentsContext } from '../../../contexts/CommentsContext'
 import CommentForm from '../CommentForm/CommentForm'
 import axiosInstance from '../../../config/axios'
-import { authHeader } from '../../../config/auth'
 
 const CreateCommentForm = () => {
   const { createComment, postId } = useCommentsContext()
@@ -9,11 +8,7 @@ const CreateCommentForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    const res = await axiosInstance.post('comments/', { ...formData, postId }, {
-      headers: {
-        ...authHeader(),
-      },
-    })
+    const res = await axiosInstance.post('comments/', { ...formData, postId })
 
     if (res.status === 201) {
       const commentFromServer = res.data

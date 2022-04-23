@@ -1,13 +1,18 @@
 import { useDispatch } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { signInQuery } from '../../../redux/actionCreators/authActionCreators'
 
 const SignIn = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const from = location.state?.from?.pathname || '/'
 
   const submitHandler = (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    dispatch(signInQuery(formData, e))
+    dispatch(signInQuery(formData, e, () => navigate(from, { replace: true })))
   }
   return (
     <div className="d-flex justify-content-center">
@@ -15,7 +20,7 @@ const SignIn = () => {
         <div className="mb-3">
           <input
             name="username"
-            type="email"
+            type="text"
             className="form-control"
             aria-describedby="emailHelp"
             placeholder="Email or username"

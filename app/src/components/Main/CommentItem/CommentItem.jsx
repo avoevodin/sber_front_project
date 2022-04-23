@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useCommentsContext } from '../../../contexts/CommentsContext'
 import Modal from '../../Modal/Modal'
 import CommentForm from '../CommentForm/CommentForm'
-import { authHeader } from '../../../config/auth'
 import axiosInstance from '../../../config/axios'
 
 const CommentItem = ({
@@ -28,11 +27,7 @@ const CommentItem = ({
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    const res = await axiosInstance.patch(`comments/${comment.id}`, formData, {
-      headers: {
-        ...authHeader(),
-      },
-    })
+    const res = await axiosInstance.patch(`comments/${comment.id}`, formData)
 
     if (res.status === 200) {
       const updatedComment = res.data

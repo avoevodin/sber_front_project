@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { authHeader } from '../config/auth'
 import axiosInstance from '../config/axios'
 
 const useComments = ({ postId }) => {
@@ -17,11 +16,7 @@ const useComments = ({ postId }) => {
   }
 
   const deleteComment = async (id) => {
-    const res = await axiosInstance.delete(`comments/${id}`, {
-      headers: {
-        ...authHeader(),
-      },
-    })
+    const res = await axiosInstance.delete(`comments/${id}`)
 
     if (res.status !== 200) return false
 
@@ -32,9 +27,6 @@ const useComments = ({ postId }) => {
 
   useEffect(() => {
     axiosInstance.get(`comments/post/${postId}`, {
-      headers: {
-        ...authHeader(),
-      },
       signal: currentController.signal,
     })
       .then((response) => {

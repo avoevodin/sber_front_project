@@ -16,4 +16,4 @@ module.exports = {
     'no-console': 0,
     'import/no-cycle': 0,
   },
-};
+}

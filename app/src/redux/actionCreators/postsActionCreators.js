@@ -1,5 +1,4 @@
 /* eslint-disable no-alert */
-import { authHeader } from '../../config/auth'
 import axiosInstance from '../../config/axios'
 import {
   ADD_POST, DELETE_POST, SET_POSTS, UPDATE_POST,
@@ -11,11 +10,7 @@ const setPosts = (newPosts) => ({
 })
 
 export const setPostsQuery = (filter) => async (dispatch) => {
-  const res = await axiosInstance.get(`posts/${filter}`, {
-    headers: {
-      ...authHeader(),
-    },
-  })
+  const res = await axiosInstance.get(`posts/${filter}`)
   const dataFromServer = res.data
   dispatch(
     setPosts(dataFromServer),
@@ -29,12 +24,7 @@ const addPost = (newPost) => ({
 
 export const addPostQuery = (formData, e, changePosts = true) => async (dispatch) => {
   console.log('hi', formData, 'changePosts: ', changePosts)
-  const res = await axiosInstance.post('posts/', formData, {
-    headers: {
-      ...authHeader(),
-    },
-  })
-  console.log(res.status)
+  const res = await axiosInstance.post('posts/', formData)
   if (res.status === 201) {
     if (changePosts) {
       const postFromServer = res.data
@@ -52,11 +42,7 @@ const deletePost = (id) => ({
 })
 
 export const deletePostQuery = (id, navigateBack = undefined) => async (dispatch) => {
-  const res = await axiosInstance.delete(`posts/${id}`, {
-    headers: {
-      ...authHeader(),
-    },
-  })
+  const res = await axiosInstance.delete(`posts/${id}`)
 
   if (res.status === 200) {
     dispatch(deletePost(id))
@@ -67,9 +53,6 @@ export const deletePostQuery = (id, navigateBack = undefined) => async (dispatch
 
 export const getPostQuery = (id, signal, setLoading) => async (dispatch) => {
   const res = await axiosInstance(`posts/${id}`, {
-    headers: {
-      ...authHeader(),
-    },
     signal,
   })
   if (res.status === 200) {
@@ -85,11 +68,7 @@ const updatePost = (updatedPost) => ({
 })
 
 export const updatePostQuery = (id, formData, closeModal, e) => async (dispatch) => {
-  const res = await axiosInstance.patch(`posts/${id}`, formData, {
-    headers: {
-      ...authHeader(),
-    },
-  })
+  const res = await axiosInstance.patch(`posts/${id}`, formData)
 
   if (res.status === 200) {
     const updatedPost = res.data

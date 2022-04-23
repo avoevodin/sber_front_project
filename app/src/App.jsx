@@ -7,6 +7,7 @@ import PostDetailWrapper from './components/Main/PostDetailWrapper/PostDetailWra
 import Home from './components/Home/Home'
 import SignIn from './components/Auth/SignIn/SignIn'
 import SignUp from './components/Auth/SignUp/SignUp'
+import RequireAuth from './components/Auth/RequireAuth/RequireAuth'
 
 const App = () => (
   <BrowserRouter>
@@ -18,8 +19,23 @@ const App = () => (
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
         </Route>
-        <Route path="/posts" element={<Main />} />
-        <Route path="/posts/:postId" element={<PostDetailWrapper />} />
+        <Route
+          path="/posts"
+          element={(
+            <RequireAuth>
+              <Main />
+            </RequireAuth>
+        )}
+        />
+        <Route
+          path="/posts/:postId"
+          element={(
+            <RequireAuth>
+              <PostDetailWrapper />
+            </RequireAuth>
+        )}
+        />
+
       </Routes>
     </div>
     <Footer />
