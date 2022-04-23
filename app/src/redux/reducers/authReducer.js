@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, REGISTER_SUCCESS } from '../types/authTypes'
+import { LOGIN_SUCCESS, REGISTER_SUCCESS, UPDATE_TOKEN } from '../types/authTypes'
 
 // eslint-disable-next-line default-param-last
 const authReducer = (store = {}, action) => {
@@ -8,6 +8,12 @@ const authReducer = (store = {}, action) => {
 
     case LOGIN_SUCCESS:
       return action.payload
+
+    case UPDATE_TOKEN:
+      return {
+        ...store,
+        user: action.payload,
+      }
 
     default:
       return store
