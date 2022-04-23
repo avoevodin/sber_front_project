@@ -11,6 +11,7 @@ import initState from './redux/state'
 import setupInterseptors from './services/setupInterseptors'
 
 const store = createStore(rootReducer, initState, composeWithDevTools(applyMiddleware(thunk)))
+setupInterseptors(store)
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,5 +21,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root'),
 )
-
-setupInterseptors(store)

@@ -1,16 +1,16 @@
 const express = require('express')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const { postsRouter } = require('./routes/postsRouter')
 const { commentsRouter } = require('./routes/commentsRouter')
 const { PORT } = require('./settings')
 const { authRouter } = require('./routes/authRouter')
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/v1/posts', postsRouter)
 app.use('/api/v1/comments', commentsRouter)
