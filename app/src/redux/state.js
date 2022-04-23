@@ -1,5 +1,5 @@
 const user = JSON.parse(localStorage.getItem('user'))
-export const initAuthData = user
+const initAuthData = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null }
 

@@ -1,7 +1,9 @@
 /* eslint-disable no-alert */
 import axiosInstance from '../../config/axios'
 import TokenService from '../../services/token.service'
-import { LOGIN_SUCCESS, REGISTER_SUCCESS, UPDATE_TOKEN } from '../types/authTypes'
+import {
+  LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS, UPDATE_TOKEN,
+} from '../types/authTypes'
 
 const signUp = (userData) => ({
   type: REGISTER_SUCCESS,
@@ -62,4 +64,14 @@ export const updateTokenQuery = () => async (dispatch) => {
       dispatch(updateToken(userState))
     })
     .catch((err) => err)
+}
+
+const signOut = () => ({
+  type: LOGOUT,
+})
+
+export const signOutQuery = (navigate) => async (dispatch) => {
+  TokenService.removeUser()
+  dispatch(signOut())
+  navigate('/')
 }

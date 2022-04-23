@@ -4,7 +4,6 @@ const { Link, Navigate } = require('react-router-dom')
 
 const Home = (from = undefined) => {
   const isLoggedIn = useSelector((store) => store.auth.isLoggedIn)
-
   if (isLoggedIn) {
     return <Navigate to="/posts" replace />
   }
