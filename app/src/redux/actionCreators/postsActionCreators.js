@@ -23,7 +23,6 @@ const addPost = (newPost) => ({
 })
 
 export const addPostQuery = (formData, e, changePosts = true) => async (dispatch) => {
-  console.log('hi', formData, 'changePosts: ', changePosts)
   const res = await axiosInstance.post('posts/', formData)
   if (res.status === 201) {
     if (changePosts) {

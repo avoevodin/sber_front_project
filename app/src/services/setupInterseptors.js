@@ -16,7 +16,6 @@ const setup = (store) => {
     },
     (err) => Promise.reject(err),
   )
-
   const { dispatch } = store
   axiosInstance.interceptors.response.use(
     (res) => res,
