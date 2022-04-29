@@ -1,9 +1,22 @@
 import { BsFillTrashFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { motion } from 'framer-motion'
 import styles from './postItem.module.css'
 import CommentsToggleBar from '../../CommentsToggleBar/CommentsToggleBar'
 import { deletePostQuery } from '../../../../redux/actionCreators/postsActionCreators'
+
+const postsListVariants = {
+  start: {
+    opacity: 0,
+  },
+  end: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+}
 
 const PostItem = ({ post, index }) => {
   const dispatch = useDispatch()
@@ -13,7 +26,7 @@ const PostItem = ({ post, index }) => {
   }
 
   return (
-    <li className={`list-group-item ${styles.list_item_without_borders}`}>
+    <motion.li variants={postsListVariants} initial="start" animate="end" className={`list-group-item ${styles.list_item_without_borders}`}>
       <div className="my-3">
         <div className="row g-0">
           <div className="col-md-4">
@@ -59,7 +72,7 @@ const PostItem = ({ post, index }) => {
         index={index}
       />
       <hr />
-    </li>
+    </motion.li>
   )
 }
 

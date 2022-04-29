@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
@@ -7,17 +6,6 @@ import useDebounce from '../../../hooks/useDebounce'
 import { setPostsQuery } from '../../../redux/actionCreators/postsActionCreators'
 import PostItem from './PostItem/PostItem'
 
-const postsListVariants = {
-  start: {
-    opacity: 0,
-  },
-  end: {
-    opacity: 1,
-    transition: {
-      duration: 1,
-    },
-  },
-}
 const PostsList = () => {
   const dispatch = useDispatch()
   const posts = useSelector((store) => store.posts)
@@ -38,7 +26,7 @@ const PostsList = () => {
   }, [delayedFilter])
 
   return (
-    <motion.ul variants={postsListVariants} initial="start" animate="end" className="d-flex flex-column-reverse list-group">
+    <ul className="d-flex flex-column-reverse list-group">
       {posts.map((post, index) => (
         <CommentsContextProvider key={post.id} postId={post.id}>
           <PostItem
@@ -47,7 +35,7 @@ const PostsList = () => {
           />
         </CommentsContextProvider>
       ))}
-    </motion.ul>
+    </ul>
   )
 }
 
