@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import CommentsContextProvider from '../../../contexts/CommentsContext'
+import useDebounce from '../../../hooks/useDebounce'
 import { setPostsQuery } from '../../../redux/actionCreators/postsActionCreators'
 import PostItem from './PostItem/PostItem'
 
@@ -22,6 +23,7 @@ const PostsList = () => {
   const posts = useSelector((store) => store.posts)
   const filter = useSelector((store) => store.filter)
   const [searchParams] = useSearchParams()
+  const delayedFilter = useDebounce(filter, 500)
 
   useEffect(() => {
     const parsedQuery = JSON.parse(searchParams.get('filter'))
@@ -30,10 +32,10 @@ const PostsList = () => {
     // Is there another solution?
     if (!(parsedQuery && parsedQuery.title) || filter) {
       dispatch(
-        setPostsQuery(filter),
+        setPostsQuery(delayedFilter),
       )
     }
-  }, [filter])
+  }, [delayedFilter])
 
   return (
     <motion.ul variants={postsListVariants} initial="start" animate="end" className="d-flex flex-column-reverse list-group">
