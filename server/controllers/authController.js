@@ -77,9 +77,10 @@ const signIn = (req, res) => {
 const updateToken = (req, res) => {
   const postData = req.body
   const refreshToken = postData?.refreshToken
-
+  console.log(tokensList)
+  console.log(refreshToken)
   if (refreshToken && refreshToken in tokensList) {
-    jwt.verify(refreshToken, authConfig.secret, (err) => {
+    jwt.verify(refreshToken, authConfig.refreshTokenSecret, (err) => {
       if (err) {
         let resData
         if (err.expiredAt) {
@@ -88,6 +89,7 @@ const updateToken = (req, res) => {
             message: 'Token has expired!',
           }
         } else {
+          console.log(err)
           resData = {
             status: 401,
             message: 'Unauthorized!',
