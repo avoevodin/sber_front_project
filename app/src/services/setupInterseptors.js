@@ -3,9 +3,11 @@ import axiosInstance from '../config/axios'
 import { updateTokenQuery } from '../redux/actionCreators/authActionCreators'
 
 const setup = (store) => {
+  const { dispatch, getState } = store
+
   axiosInstance.interceptors.request.use(
     (config) => {
-      const token = store.auth?.tokensData?.token
+      const token = getState().auth?.user?.tokensData?.token
       const newConfig = { ...config }
       newConfig.headers['Content-Type'] = 'application/json'
       if (token) {
@@ -15,7 +17,6 @@ const setup = (store) => {
     },
     (err) => Promise.reject(err),
   )
-  const { dispatch } = store
   axiosInstance.interceptors.response.use(
     (res) => res,
     async (err) => {
