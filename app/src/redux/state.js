@@ -1,4 +1,6 @@
-const user = JSON.parse(localStorage.getItem('user'))
+import tokenService from '../services/token.service'
+
+const user = tokenService.getUser()
 const initAuthData = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null }

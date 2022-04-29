@@ -56,11 +56,14 @@ const updateToken = (payload) => ({
   payload,
 })
 
-export const updateTokenQuery = () => async (dispatch) => {
-  const refreshToken = TokenService.getLocalRefreshToken()
+export const updateTokenQuery = (refreshToken) => async (dispatch, getState) => {
   await axiosInstance.post('auth/token', { refreshToken })
     .then((res) => {
-      const userState = TokenService.updateLocalToken(res.data?.token)
+      const userState = getState().auth.user
+      if (userState.tokensData) {
+        userState.tokensData.token = res.data?.token
+        TokenService.setUser(userState)
+      }
       dispatch(updateToken(userState))
     })
     .catch((err) => err)
@@ -70,8 +73,7 @@ const signOut = () => ({
   type: LOGOUT,
 })
 
-export const signOutQuery = (navigate) => async (dispatch) => {
+export const signOutQuery = () => async (dispatch) => {
   TokenService.removeUser()
   dispatch(signOut())
-  navigate('/')
 }

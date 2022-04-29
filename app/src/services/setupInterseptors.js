@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import axiosInstance from '../config/axios'
-import { updateTokenQuery } from '../redux/actionCreators/authActionCreators'
+import { signOutQuery, updateTokenQuery } from '../redux/actionCreators/authActionCreators'
 
 const setup = (store) => {
   const { dispatch, getState } = store
@@ -25,12 +25,16 @@ const setup = (store) => {
         if (err.response.status === 403 && !originalConfig._retry) {
           originalConfig._retry = true
           try {
-            await dispatch(updateTokenQuery())
+            const refreshToken = getState().auth?.user?.tokensData?.refreshToken
+            if (refreshToken) await dispatch(updateTokenQuery(refreshToken))
             return axiosInstance(originalConfig)
           } catch (_err) {
             return Promise.reject(_err)
           }
         }
+      }
+      if (getState().auth.isLoggedIn) {
+        dispatch(signOutQuery())
       }
       return Promise.reject(err)
     },

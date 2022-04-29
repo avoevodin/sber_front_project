@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const authConfig = require('../config/auth.config')
 const { db } = require('../DB')
 
+// eslint-disable-next-line consistent-return
 const verifyToken = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1]
   if (!token) {

@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { signOutQuery } from '../../redux/actionCreators/authActionCreators'
 
 const Header = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const auth = useSelector((store) => store.auth)
   const isLoggedIn = auth?.isLoggedIn
   const signOutHandler = (e) => {
     e.preventDefault()
-    dispatch(signOutQuery(navigate))
+    dispatch(signOutQuery())
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
