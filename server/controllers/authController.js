@@ -73,19 +73,41 @@ const signIn = (req, res) => {
   return res.status(200).send(getUserDataForClient(user.id, userData))
 }
 
+// eslint-disable-next-line consistent-return
 const updateToken = (req, res) => {
   const postData = req.body
   const refreshToken = postData?.refreshToken
 
   if (refreshToken && refreshToken in tokensList) {
-    const tokensData = tokensList[refreshToken]
-    tokensData.token = jwt.sign({ id: tokensData.userId }, authConfig.secret, {
-      expiresIn: authConfig.tokenLife,
-    })
+    jwt.verify(refreshToken, authConfig.secret, (err) => {
+      if (err) {
+        let resData
+        if (err.expiredAt) {
+          resData = {
+            status: 403,
+            message: 'Token has expired!',
+          }
+        } else {
+          resData = {
+            status: 401,
+            message: 'Unauthorized!',
+          }
+        }
 
-    res.status(200).json({ token: tokensData.token })
+        return res.status(resData.status).send({
+          message: resData.message,
+        })
+      }
+
+      const tokensData = tokensList[refreshToken]
+      tokensData.token = jwt.sign({ id: tokensData.userId }, authConfig.secret, {
+        expiresIn: authConfig.tokenLife,
+      })
+
+      return res.status(200).json({ token: tokensData.token })
+    })
   } else {
-    res.status(404).send('Invalid request')
+    return res.status(404).send('Invalid request')
   }
 }
 

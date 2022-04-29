@@ -1,12 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 import axiosInstance from '../config/axios'
 import { updateTokenQuery } from '../redux/actionCreators/authActionCreators'
-import tokenService from './token.service'
 
 const setup = (store) => {
   axiosInstance.interceptors.request.use(
     (config) => {
-      const token = tokenService.getLocalToken()
+      const token = store.auth?.tokensData?.token
       const newConfig = { ...config }
       newConfig.headers['Content-Type'] = 'application/json'
       if (token) {
